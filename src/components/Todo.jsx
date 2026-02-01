@@ -30,8 +30,8 @@ const Todo = () => {
   const deleteTodo = (id) => {
 
     setTodoList((prvTodos) => {
-      return
-      prvTodos.filter((todo) => todo.id !== id)
+      return prvTodos.filter((todo) => todo.id !== id)  
+      
     }
     )
   }
@@ -70,9 +70,9 @@ const Todo = () => {
       </div>
 
       <div>
-        {todoList.map((item) => (
+        {todoList.map((item, index) => (
           <TodoItems
-            key={item.id}
+            key={item.id + index}
             text={item.text}
             id={item.id}
             isComplete={item.isComplete}
