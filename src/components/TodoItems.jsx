@@ -3,7 +3,7 @@ import tick from '../assets/tick.svg'
 import un_tick from '../assets/un_tick.svg'
 import remove from '../assets/remove.svg'
 
-const TodoItems = ({text, id, isComplte, deleteTodo, Toggle}) => {
+const TodoItems = ({text, id, isComplte, deleteTodo, Toggle}) => { 
   return (
     <div className='flex items-center my-3 gap-2'>
 
