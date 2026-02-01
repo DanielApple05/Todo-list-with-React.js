@@ -1,9 +1,9 @@
 import React from 'react';
 import tick from '../assets/tick.svg'
 import un_tick from '../assets/un_tick.svg'
-import remove from '../assets/remove.svg'
+import remove_icon from '../assets/remove.svg'
 
-const TodoItems = ({text, id, isComplte, deleteTodo, Toggle}) => { 
+const TodoItems = ({text, id, isComplte, deleteTodo, Toggle}) => {  
   return (
     <div className='flex items-center my-3 gap-2'>
 
@@ -14,7 +14,7 @@ const TodoItems = ({text, id, isComplte, deleteTodo, Toggle}) => {
         </p>
       </div>
 
-      <img src={remove} alt="" className='w-3.5 cursor-pointer ' onClick={()=> deleteTodo(id) } />
+      <img src={remove_icon} alt="" className='w-3.5 cursor-pointer ' onClick={()=> deleteTodo(id) } />
 
     </div>
   );
