@@ -10,21 +10,19 @@ const Todo = () => {
 
   const add = () => {
     const inputText = inputRef.current.value.trim();
-    console.log(inputText);
-
 
     if (inputText === "") {
       return null;
     }
- 
+
     const newTodo = {
 
       id: Date.now(),
       text: inputText,
-      isComplete: false
+      isComplete: false,
 
     }
-    setTodoList((prevTodos) => [prevTodos, newTodo])
+    setTodoList((prev) => [...prev, newTodo])
     inputRef.current.value = "";
 
   }
@@ -39,18 +37,18 @@ const Todo = () => {
   }
 
   const toggle = (id) => {
-setTodoList((prevTodos) => {
-  return prevTodos.map ((todo) => {
-    if (todo.id === id ){
-      return{ ...todo, isComplete: !todo.isComplete }
-    }
+    setTodoList((prevTodos) => {
+      return prevTodos.map((todo) => {
+        if (todo.id === id) {
+          return { ...todo, isComplete: !todo.isComplete }
+        }
 
-    return todo;
-  })
-})
+        return todo;
+      })
+    })
   }
 
-useEffect(() => {console.log(todoList)}, [todoList]  )
+  useEffect(() => { console.log(todoList) }, [todoList])
 
   return (
     <div className=' bg-white place-self-center w-11/12 max-w-md flex flex-col p-7 min-h-[550px] rounded-xl'>
@@ -72,14 +70,18 @@ useEffect(() => {console.log(todoList)}, [todoList]  )
       </div>
 
       <div>
-
-        {todoList.map((item, index) => {
-          return <TodoItems key={index} text={item.text} id={item.id}
-            isComplete={TodoItems.isComplete} deleteTodo={deleteTodo} toggle = {toggle} />
-        })}
-
-
+        {todoList.map((item) => (
+          <TodoItems
+            key={item.id}
+            text={item.text}
+            id={item.id}
+            isComplete={item.isComplete}
+            deleteTodo={deleteTodo}
+          toggle={toggle}
+          />
+        ))}
       </div>
+
 
     </div>
   );
