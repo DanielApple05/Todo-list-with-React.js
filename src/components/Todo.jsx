@@ -5,33 +5,23 @@ import TodoItems from './TodoItems.jsx';
 const Todo = () => {
 
   const [todoList, setTodoList] = useState([]);
-
   const inputRef = useRef();
-
   const add = () => {
     const inputText = inputRef.current.value.trim();
-
     if (inputText === "") {
       return null;
     }
-
     const newTodo = {
-
       id: Date.now(),
       text: inputText,
       isComplete: false,
-
     }
     setTodoList((prev) => [...prev, newTodo])
     inputRef.current.value = "";
-
   }
-
   const deleteTodo = (id) => {
-
     setTodoList((prvTodos) => {
-      return prvTodos.filter((todo) => todo.id !== id)  
-      
+      return prvTodos.filter((todo) => todo.id !== id)      
     }
     )
   }
