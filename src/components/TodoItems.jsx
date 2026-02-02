@@ -1,4 +1,5 @@
 import React from 'react';
+import fontawe
 import tick from '../assets/tick.svg'
 import un_tick from '../assets/un_tick.svg'
 import remove_icon from '../assets/remove.svg'
