@@ -45,13 +45,10 @@ const Todo = () => {
   return (
     <div>
 
-      <div className='flex items-center mt-7 gap-2 place-self-center w-[40%] p-4 mb-8  rounded-xl justify-between'>
+      <div className='flex items-center mt-7 gap-2 place-self-center w-[40%] mb-8  rounded-xl justify-between'>
 
-        <div className='flex gap-4'>
-          <img className='w-[30px]' src={todo_icon} alt="" />
+        <h1 className=' text-white text-3xl font-semibold'>To-Do List</h1>
 
-          <h1 className=' text-white text-3xl font-semibold'>To-Do List</h1>
-        </div>
 
         <div className='cursor-pointer'>
           <img src={moonIcon} alt="" />
@@ -67,7 +64,7 @@ const Todo = () => {
           <button onClick={add} className='border-none rounded-lg bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
         </div>
 
-        <div className='bg-white flex  flex-col flex-1 '>
+        <div className='bg-white flex  flex-col flex-1'>
           {todoList.map((item, index) => (
             <TodoItems
               key={item.id + index}
@@ -79,9 +76,24 @@ const Todo = () => {
             />
           ))}
         </div>
-
+        <div className='flex justify-between bg-white'>
+          <div>
+            <p>
+              5 items left
+            </p>
+          </div>
+          <div className='flex space-x-6'>
+            <p>All</p>
+            <p>Active</p>
+            <p>Completed</p>
+          </div>
+          <div>
+            <p>
+              Clear Completed
+            </p>
+          </div>
+        </div>
       </div>
-
     </div>
   );
 }
