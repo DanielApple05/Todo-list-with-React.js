@@ -63,34 +63,36 @@ const Todo = () => {
 
           <button onClick={add} className='border-none rounded-lg bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
         </div>
+        <div>
+          <div className='bg-white flex  flex-col flex-1'>
+            {todoList.map((item, index) => (
+              <TodoItems
+                key={item.id + index}
+                text={item.text}
+                id={item.id}
+                isComplete={item.isComplete}
+                deleteTodo={deleteTodo}
+                toggle={toggle}
+              />
+            ))}
+          </div>
 
-        <div className='bg-white flex  flex-col flex-1'>
-          {todoList.map((item, index) => (
-            <TodoItems
-              key={item.id + index}
-              text={item.text}
-              id={item.id}
-              isComplete={item.isComplete}
-              deleteTodo={deleteTodo}
-              toggle={toggle}
-            />
-          ))}
-        </div>
-        <div className='flex justify-between bg-white'>
-          <div>
-            <p>
-              5 items left
-            </p>
-          </div>
-          <div className='flex space-x-6'>
-            <p>All</p>
-            <p>Active</p>
-            <p>Completed</p>
-          </div>
-          <div>
-            <p>
-              Clear Completed
-            </p>
+          <div className='flex justify-between bg-white'>
+            <div>
+              <p>
+                5 items left
+              </p>
+            </div>
+            <div className='flex space-x-6'>
+              <p>All</p>
+              <p>Active</p>
+              <p>Completed</p>
+            </div>
+            <div>
+              <p>
+                Clear Completed
+              </p>
+            </div>
           </div>
         </div>
       </div>
