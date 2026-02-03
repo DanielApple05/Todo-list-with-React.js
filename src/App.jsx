@@ -4,7 +4,7 @@ import Todo from './components/Todo'
 
 const App = () => {
   return (
-    <div className='bg-stone-900 grid py-4 min-h-screen '>
+    <div className=' bg-[url("/images/bg-desktop-light.jpg")] bg-stone-900 p-4 grid  min-h-screen bg-no-repeat '>
   <Todo/>
     </div>
   );
