@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import todo_icon from '../assets/todo_icon.svg';
 import TodoItems from './TodoItems.jsx';
+import moonIcon from '../../public/images/icon-moon.svg';
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const Todo = () => {
 
-  const [todoList, setTodoList] = useState(localStorage.getItem ("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
+  const [todoList, setTodoList] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
   const inputRef = useRef();
   const add = () => {
     const inputText = inputRef.current.value.trim();
@@ -23,7 +24,7 @@ const Todo = () => {
   }
   const deleteTodo = (id) => {
     setTodoList((prvTodos) => {
-      return prvTodos.filter((todo) => todo.id !== id)      
+      return prvTodos.filter((todo) => todo.id !== id)
     }
     )
   }
@@ -39,41 +40,47 @@ const Todo = () => {
     })
   }
 
-  useEffect(()=>{localStorage.setItem("todos", JSON.stringify(todoList)) }, [todoList])
+  useEffect(() => { localStorage.setItem("todos", JSON.stringify(todoList)) }, [todoList])
 
   return (
-   <div> 
+    <div>
 
-   <div className='flex items-center mt-7 gap-2 place-self-center bg-white w-[50%] p-4 mb-8  rounded-xl'>
+      <div className='flex items-center mt-7 gap-2 place-self-center w-[50%] p-4 mb-8  rounded-xl justify-between'>
 
-        <img className='w-[30px]' src={todo_icon} alt="" />
+        <div className='flex gap-4'>
+          <img className='w-[30px]' src={todo_icon} alt="" />
 
-        <h1 className='text-3xl font-semibold'>To-Do List</h1>
+          <h1 className=' text-white text-3xl font-semibold'>To-Do List</h1>
+        </div>
+
+        <div className='cursor-pointer'>
+          <img src={moonIcon} alt="" />
+        </div>
 
       </div>
 
-    <div className=' bg-white place-self-center w-[50%] flex flex-col p-7 min-h-[550px] rounded-xl'>
+      <div className=' bg-white place-self-center w-[50%] flex flex-col p-7 min-h-[550px] rounded-xl'>
 
-      <div className='flex items-center my-7 bg-gray-200 rounded-full'>
-        <input ref={inputRef} className='bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder=' Add your task' />
+        <div className='flex items-center my-7 bg-gray-200 rounded-full'>
+          <input ref={inputRef} className='bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder=' create a new todo...' />
 
-        <button onClick={add} className='border-none rounded-full bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
+          <button onClick={add} className='border-none rounded-full bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
+        </div>
+
+        <div>
+          {todoList.map((item, index) => (
+            <TodoItems
+              key={item.id + index}
+              text={item.text}
+              id={item.id}
+              isComplete={item.isComplete}
+              deleteTodo={deleteTodo}
+              toggle={toggle}
+            />
+          ))}
+        </div>
+
       </div>
-
-      <div>
-        {todoList.map((item, index) => (
-          <TodoItems
-            key={item.id + index}
-            text={item.text}
-            id={item.id}
-            isComplete={item.isComplete}
-            deleteTodo={deleteTodo}
-          toggle={toggle}
-          />
-        ))}
-      </div>
-
-    </div>
 
     </div>
   );
