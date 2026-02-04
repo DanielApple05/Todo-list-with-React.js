@@ -7,9 +7,11 @@ const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
   return (
     <div className='flex space-y-6 border-b justify-between px-4 rounded items-center '>
 
-      <div className='flex cursor-pointer items-center pt-4'>
+      <div className='flex items-center pt-4'>
 
-        <FontAwesomeIcon icon={isComplete ? faCircleCheck : faCircleRegular} className={`text-[20px] hover:text-purple-500 transition-colors ${isComplete ? "text-purple-500" : "text-gray-400"}`} onClick={() => { toggle(id) }} />
+        <FontAwesomeIcon icon={isComplete ? faCircleCheck : faCircleRegular} 
+        onClick={() => { toggle(id) }} 
+        className={`text-[20px] hover:text-purple-500 transition-colors ${isComplete ? "text-purple-500" : "text-gray-400"}`} />
 
         <p className={`ml-4 text-[19px] decoration-slate-100 ${isComplete ? "text-red-500 line-through" : ""}`}>
           {text}
