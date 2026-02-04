@@ -66,26 +66,26 @@ const Todo = () => {
   return (
     <div className={`p-4 grid min-h-screen bg-no-repeat
             ${darkMode
-        ? "bg-stone-900 bg-[url('/images/bg-desktop-dark.jpg')]"
+        ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
         : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
       }`}>
-      <div className='flex items-center mt-7 gap-2 place-self-center w-[40%] mb-8  rounded-xl justify-between'>
+      <div className='flex items-center mt-7 gap-2 place-self-center w-[40%] mb-6 rounded-xl justify-between'>
         <h1 className=' text-white text-3xl font-semibold'>To-Do List</h1>
         <div
           className="cursor-pointer"
           onClick={() => setDarkMode(prev => !prev)}
         >
-          <img src={darkMode ? moonIcon : sunIcon} alt="themeMode" />
+          <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" />
         </div>
 
       </div>
       <div className=' place-self-center w-[40%] flex flex-col  min-h-[550px] rounded-xl'>
-        <div className='flex items-center mb-10 bg-gray-200 rounded-lg'>
-          <input ref={inputRef} className='bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder=' create a new todo...' />
+        <div className={`flex items-center mb-10 rounded-lg  ${ darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+          <input ref={inputRef} className=' border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
-          <button onClick={add} className='border-none rounded-lg bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
+          <button onClick={add} className='border-none rounded-lg bg-green-500 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
         </div>
-        <div className='bg-white flex  flex-col flex-1 shadow-2xl'>
+        <div className={`flex flex-col flex-1 shadow-2xl  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
           {filteredTodos.map((item, index) => (
             <TodoItems
               key={item.id}
@@ -98,32 +98,32 @@ const Todo = () => {
           ))}
         </div>
 
-        <div className='flex justify-between bg-white p-4 shadow-xl'>
+        <div className={`flex justify-between p-4 shadow-xl border-t  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
           <div>
             <p>
               {itemsLeft} {itemsLeft === 1 ? "item" : "items"} left
             </p>
           </div>
-        <div className="flex space-x-6">
-  <p
-    onClick={() => setFilter("all")}
-    className={`cursor-pointer ${filter === "all" ? "font-bold text-blue-600" : "text-gray-500"}`}
-  >
-    All
-  </p>
-  <p
-    onClick={() => setFilter("active")}
-    className={`cursor-pointer ${filter === "active" ? "font-bold text-blue-600" : "text-gray-500"}`}
-  >
-    Active
-  </p>
-  <p
-    onClick={() => setFilter("completed")}
-    className={`cursor-pointer ${filter === "completed" ? "font-bold text-blue-600" : "text-gray-500"}`}
-  >
-    Completed
-  </p>
-</div>
+          <div className="flex space-x-6">
+            <p
+              onClick={() => setFilter("all")}
+              className={`cursor-pointer hover:text-black ${filter === "all" ? "font-bold text-blue-600 hover:text-blue-600" : "text-gray-500"}`}
+            >
+              All
+            </p>
+            <p
+              onClick={() => setFilter("active")}
+              className={`cursor-pointer hover:text-black ${filter === "active" ? "font-bold text-blue-600 hover:text-blue-600" : "text-gray-500"}`}
+            >
+              Active
+            </p>
+            <p
+              onClick={() => setFilter("completed")}
+              className={`cursor-pointer hover:text-black ${filter === "completed" ? "font-bold text-blue-600 hover:text-blue-600" : "text-gray-500"}`}
+            >
+              Completed
+            </p>
+          </div>
 
           <div>
             <p
