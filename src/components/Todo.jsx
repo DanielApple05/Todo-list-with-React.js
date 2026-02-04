@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import todo_icon from '../assets/todo_icon.svg';
 import TodoItems from './TodoItems.jsx';
-import moonIcon from '../../public/images/icon-moon.svg';
-import sunIcon from '../../public/images/icon-moon.svg'
+import moonIcon from '../assets/icon-moon.svg';
+import sunIcon from '../assets/icon-sun.svg'
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
 
@@ -30,6 +30,8 @@ const Todo = () => {
     )
   }
 
+   const [darkMode, setDarkMode] = useState(false);
+
   const toggle = (id) => {
     setTodoList((prevTodos) => {
       return prevTodos.map((todo) => {
@@ -40,19 +42,24 @@ const Todo = () => {
       })
     })
   }
- const [darkMode, setDarkMode] = useState();
+ 
 
   useEffect(() => { localStorage.setItem("todos", JSON.stringify(todoList)) }, [todoList])
 
   return (
-    <div>
+    <div     className={`p-4 grid min-h-screen bg-no-repeat
+            ${
+              darkMode
+                ? "bg-stone-900 bg-[url('/images/bg-desktop-dark.jpg')]"
+                : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
+            }`}>
       <div className='flex items-center mt-7 gap-2 place-self-center w-[40%] mb-8  rounded-xl justify-between'>
         <h1 className=' text-white text-3xl font-semibold'>To-Do List</h1>
         <div
           className="cursor-pointer"
           onClick={() => setDarkMode(prev => !prev)}
         >
-          <img src={darkMode ? moonIcon : sunIcon} alt="toggle theme" />
+          <img src={darkMode ? moonIcon : sunIcon} alt="themeMode" />
         </div>
 
       </div>

@@ -5,11 +5,11 @@ import remove_icon from '../assets/remove.svg';
 
 const TodoItems = ({text, id, isComplete, deleteTodo, toggle}) => {  
   return (
-    <div className='flex space-y-6 border-b justify-between px-4'>
+    <div className='flex space-y-6 border-b justify-between px-4 rounded '>
 
       <div onClick={() => {toggle(id)}} className='flex cursor-pointer pt-4'>
         <img className='w-7 ' src={isComplete ? tick : un_tick} alt="" />
-        <p className={`tex-slate-700 ml-4 text-[19px] decoration-slate-500 ${isComplete ? "Line-through" : ""}`}>
+        <p className={`tex-slate-700 ml-4 text-[19px] decoration-slate-500 ${isComplete ? "line-through" : ""}`}>
           {text}
         </p>
       </div>
