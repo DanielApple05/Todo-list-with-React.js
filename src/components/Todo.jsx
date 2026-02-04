@@ -29,7 +29,8 @@ const Todo = () => {
     )
   }
 
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
+  );
 
   const toggle = (id) => {
     setTodoList((prevTodos) => {
@@ -58,6 +59,10 @@ const Todo = () => {
 
   useEffect(() => { localStorage.setItem("todos", JSON.stringify(todoList)) }, [todoList])
 
+  useEffect(() => {
+    localStorage.setItem("theme", JSON.stringify(darkMode));
+  }, [darkMode]);
+
   return (
     <div className={`p-4 grid min-h-screen bg-no-repeat
             ${darkMode
@@ -78,9 +83,9 @@ const Todo = () => {
         <div className={`flex items-center mb-10 rounded-lg  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
           <input ref={inputRef} className=' border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
-          <button onClick={add} className='border-none rounded-lg bg-purple-500 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
+          <button onClick={add} className='border-none rounded-lg bg-[#b266ff] w-32 h-14 text-white text-lg font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
         </div>
-        <div className={`flex flex-col flex-1 shadow-2xl  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+        <div className={`flex flex-col  shadow-2xl   ${darkMode ? "bg-[#1e223c]" : "bg-white"} h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-red-400 scrollbar-track-red-200 `}>
           {filteredTodos.map((item, index) => (
             <TodoItems
               key={item.id}
@@ -103,10 +108,10 @@ const Todo = () => {
             <p
               onClick={() => setFilter("all")}
               className={`cursor-pointer transition-colors ${filter === "all"
-                  ? "font-bold text-blue-600"
-                  : darkMode
-                    ? "text-gray-400 hover:text-white"
-                    : "text-gray-500 hover:text-black"
+                ? "font-bold text-blue-500"
+                : darkMode
+                  ? "text-gray-400 hover:text-white"
+                  : "text-gray-500 hover:text-black"
                 }`}
             >
               All
@@ -114,10 +119,10 @@ const Todo = () => {
             <p
               onClick={() => setFilter("active")}
               className={`cursor-pointer transition-colors ${filter === "active"
-                  ? "font-bold text-blue-600"
-                  : darkMode
-                    ? "text-gray-400 hover:text-white"
-                    : "text-gray-500 hover:text-black"
+                ? "font-bold text-blue-500"
+                : darkMode
+                  ? "text-gray-400 hover:text-white"
+                  : "text-gray-500 hover:text-black"
                 }`}
             >
               Active
@@ -126,10 +131,10 @@ const Todo = () => {
             <p
               onClick={() => setFilter("completed")}
               className={`cursor-pointer transition-colors ${filter === "completed"
-                  ? "font-bold text-blue-600"
-                  : darkMode
-                    ? "text-gray-400 hover:text-white"
-                    : "text-gray-500 hover:text-black"
+                ? "font-bold text-blue-500"
+                : darkMode
+                  ? "text-gray-400 hover:text-white"
+                  : "text-gray-500 hover:text-black"
                 }`}
             >
               Completed

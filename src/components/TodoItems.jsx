@@ -11,7 +11,7 @@ const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
 
         <FontAwesomeIcon icon={isComplete ? faCircleCheck : faCircleRegular} 
         onClick={() => { toggle(id) }} 
-        className={`text-[20px] hover:text-purple-500 transition-colors ${isComplete ? "text-purple-500" : "text-gray-400"}`} />
+        className={`text-[20px] hover:text-[#b266ff] transition-colors ${isComplete ? "text-[#b266ff]" : "text-gray-400"}`} />
 
         <p className={`ml-4 text-[19px] decoration-slate-100 ${isComplete ? "text-red-500 line-through" : ""}`}>
           {text}
