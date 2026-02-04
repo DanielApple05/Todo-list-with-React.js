@@ -3,7 +3,7 @@ import tick from '../assets/tick.svg';
 import un_tick from '../assets/un_tick.svg';
 import remove_icon from '../assets/remove.svg';
 
-const TodoItems = ({text, id, isComplete, deleteTodo, toggle}) => {  
+const TodoItems = ({text, id, isComplete, deleteTodo, toggle, }) => {  
   return (
     <div className='flex space-y-6 border-b justify-between px-4 rounded '>
 

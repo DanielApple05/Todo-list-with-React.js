@@ -30,7 +30,7 @@ const Todo = () => {
     )
   }
 
-   const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   const toggle = (id) => {
     setTodoList((prevTodos) => {
@@ -42,17 +42,25 @@ const Todo = () => {
       })
     })
   }
- 
+
+  const [filter, setFilter] = useState("");
+
+  const completedTodos = todoList.filter(
+    todo => todo.isCompleted
+  );
+
+  const filteredTodos =
+    filter === "completed" ? completedTodos : todoList;
+
 
   useEffect(() => { localStorage.setItem("todos", JSON.stringify(todoList)) }, [todoList])
 
   return (
-    <div     className={`p-4 grid min-h-screen bg-no-repeat
-            ${
-              darkMode
-                ? "bg-stone-900 bg-[url('/images/bg-desktop-dark.jpg')]"
-                : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
-            }`}>
+    <div className={`p-4 grid min-h-screen bg-no-repeat
+            ${darkMode
+        ? "bg-stone-900 bg-[url('/images/bg-desktop-dark.jpg')]"
+        : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
+      }`}>
       <div className='flex items-center mt-7 gap-2 place-self-center w-[40%] mb-8  rounded-xl justify-between'>
         <h1 className=' text-white text-3xl font-semibold'>To-Do List</h1>
         <div
@@ -64,25 +72,25 @@ const Todo = () => {
 
       </div>
       <div className=' place-self-center w-[40%] flex flex-col  min-h-[550px] rounded-xl'>
-        <div className='flex items-center mb-7 bg-gray-200 rounded-lg'>
+        <div className='flex items-center mb-10 bg-gray-200 rounded-lg'>
           <input ref={inputRef} className='bg-transparent border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder=' create a new todo...' />
 
           <button onClick={add} className='border-none rounded-lg bg-orange-600 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
         </div>
-        <div className='bg-white flex  flex-col flex-1'>
-          {todoList.map((item, index) => (
-            <TodoItems
-              key={item.id + index}
-              text={item.text}
-              id={item.id}
-              isComplete={item.isComplete}
-              deleteTodo={deleteTodo}
-              toggle={toggle}
-            />
-          ))}
+        <div className='bg-white flex  flex-col flex-1 shadow-2xl'>
+          {filteredTodos.map((item, index) => (
+          <TodoItems
+            key={item.id}
+            text={item.text}
+            id={item.id}
+            isComplete={item.isComplete}
+            deleteTodo={deleteTodo}
+            toggle={toggle}
+          />
+        ))}
         </div>
 
-        <div className='flex justify-between bg-white p-2'>
+        <div className='flex justify-between bg-white p-2 shadow-xl'>
           <div>
             <p>
               5 items left
@@ -99,6 +107,7 @@ const Todo = () => {
             </p>
           </div>
         </div>
+
       </div>
     </div>
   );
