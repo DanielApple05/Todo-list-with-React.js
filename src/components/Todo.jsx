@@ -3,8 +3,7 @@ import todo_icon from '../assets/todo_icon.svg';
 import TodoItems from './TodoItems.jsx';
 import moonIcon from '../assets/icon-moon.svg';
 import sunIcon from '../assets/icon-sun.svg'
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+
 
 const Todo = () => {
 
@@ -42,11 +41,7 @@ const Todo = () => {
       })
     })
   }
-
-
-
   const [filter, setFilter] = useState("all");
-
   const itemsLeft = todoList.filter(todo => !todo.isComplete).length;
 
   const filteredTodos = todoList.filter(todo => {
@@ -80,7 +75,7 @@ const Todo = () => {
 
       </div>
       <div className=' place-self-center w-[40%] flex flex-col  min-h-[550px] rounded-xl'>
-        <div className={`flex items-center mb-10 rounded-lg  ${ darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+        <div className={`flex items-center mb-10 rounded-lg  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
           <input ref={inputRef} className=' border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
           <button onClick={add} className='border-none rounded-lg bg-purple-500 w-32 h-14 text-white text-lg font-medium cursor-pointer'>ADD +</button>
@@ -107,22 +102,39 @@ const Todo = () => {
           <div className="flex space-x-6">
             <p
               onClick={() => setFilter("all")}
-              className={`cursor-pointer hover:text-black ${filter === "all" ? "font-bold text-blue-600 hover:text-blue-600" : "text-gray-500"}`}
+              className={`cursor-pointer transition-colors ${filter === "all"
+                  ? "font-bold text-blue-600"
+                  : darkMode
+                    ? "text-gray-400 hover:text-white"
+                    : "text-gray-500 hover:text-black"
+                }`}
             >
               All
             </p>
             <p
               onClick={() => setFilter("active")}
-              className={`cursor-pointer hover:text-black ${filter === "active" ? "font-bold text-blue-600 hover:text-blue-600" : "text-gray-500"}`}
+              className={`cursor-pointer transition-colors ${filter === "active"
+                  ? "font-bold text-blue-600"
+                  : darkMode
+                    ? "text-gray-400 hover:text-white"
+                    : "text-gray-500 hover:text-black"
+                }`}
             >
               Active
             </p>
+
             <p
               onClick={() => setFilter("completed")}
-              className={`cursor-pointer hover:text-black ${filter === "completed" ? "font-bold text-blue-600 hover:text-blue-600" : "text-gray-500"}`}
+              className={`cursor-pointer transition-colors ${filter === "completed"
+                  ? "font-bold text-blue-600"
+                  : darkMode
+                    ? "text-gray-400 hover:text-white"
+                    : "text-gray-500 hover:text-black"
+                }`}
             >
               Completed
             </p>
+
           </div>
 
           <div>

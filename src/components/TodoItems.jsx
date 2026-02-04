@@ -1,20 +1,22 @@
 import React from 'react';
-import tick from '../assets/tick.svg';
-import un_tick from '../assets/un_tick.svg';
-import remove_icon from '../assets/remove.svg';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircle as faCircleRegular } from "@fortawesome/free-regular-svg-icons";
+import { faCircleCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const TodoItems = ({text, id, isComplete, deleteTodo, toggle, }) => {  
+const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
   return (
-    <div className='flex space-y-6 border-b justify-between px-4 rounded '>
+    <div className='flex space-y-6 border-b justify-between px-4 rounded items-center '>
 
-      <div onClick={() => {toggle(id)}} className='flex cursor-pointer pt-4'>
-        <img className='w-7 ' src={isComplete ? tick : un_tick} alt="" />
+      <div onClick={() => { toggle(id) }} className='flex cursor-pointer items-center pt-4'>
+
+        <FontAwesomeIcon icon={isComplete ? faCircleCheck : faCircleRegular} className={`text-[20px] hover:text-purple-500 transition-color ${isComplete ? "text-purple-500" : "text-gray-400"}`} />
+
         <p className={`ml-4 text-[19px] decoration-slate-100 ${isComplete ? "text-red-500 line-through" : ""}`}>
           {text}
         </p>
       </div>
 
-      <img src={remove_icon} alt="" className='w-4 cursor-pointer ' onClick={()=> deleteTodo(id) } />
+      <FontAwesomeIcon icon={faTrash} className='w-4 cursor-pointer text-purple-500 transition-colors hover:text-red-500' onClick={() => deleteTodo(id)} />
 
     </div>
   );
