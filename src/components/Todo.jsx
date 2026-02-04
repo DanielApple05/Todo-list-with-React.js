@@ -43,14 +43,22 @@ const Todo = () => {
     })
   }
 
-  const [filter, setFilter] = useState("");
 
-  const completedTodos = todoList.filter(
-    todo => todo.isCompleted
-  );
 
-  const filteredTodos =
-    filter === "completed" ? completedTodos : todoList;
+  const [filter, setFilter] = useState("all");
+
+  const itemsLeft = todoList.filter(todo => !todo.isComplete).length;
+
+  const filteredTodos = todoList.filter(todo => {
+    if (filter === "completed") return todo.isComplete;
+    if (filter === "All") return todo
+    if (filter === "active") return !todo.isComplete;
+    return true;
+  });
+
+  const clearCompleted = () => {
+    setTodoList(todoList.filter(todo => !todo.isComplete));
+  };
 
 
   useEffect(() => { localStorage.setItem("todos", JSON.stringify(todoList)) }, [todoList])
@@ -79,32 +87,52 @@ const Todo = () => {
         </div>
         <div className='bg-white flex  flex-col flex-1 shadow-2xl'>
           {filteredTodos.map((item, index) => (
-          <TodoItems
-            key={item.id}
-            text={item.text}
-            id={item.id}
-            isComplete={item.isComplete}
-            deleteTodo={deleteTodo}
-            toggle={toggle}
-          />
-        ))}
+            <TodoItems
+              key={item.id}
+              text={item.text}
+              id={item.id}
+              isComplete={item.isComplete}
+              deleteTodo={deleteTodo}
+              toggle={toggle}
+            />
+          ))}
         </div>
 
-        <div className='flex justify-between bg-white p-2 shadow-xl'>
+        <div className='flex justify-between bg-white p-4 shadow-xl'>
           <div>
             <p>
-              5 items left
+              {itemsLeft} {itemsLeft === 1 ? "item" : "items"} left
             </p>
           </div>
-          <div className='flex space-x-6'>
-            <p>All</p>
-            <p>Active</p>
-            <p>Completed</p>
-          </div>
+        <div className="flex space-x-6">
+  <p
+    onClick={() => setFilter("all")}
+    className={`cursor-pointer ${filter === "all" ? "font-bold text-blue-600" : "text-gray-500"}`}
+  >
+    All
+  </p>
+  <p
+    onClick={() => setFilter("active")}
+    className={`cursor-pointer ${filter === "active" ? "font-bold text-blue-600" : "text-gray-500"}`}
+  >
+    Active
+  </p>
+  <p
+    onClick={() => setFilter("completed")}
+    className={`cursor-pointer ${filter === "completed" ? "font-bold text-blue-600" : "text-gray-500"}`}
+  >
+    Completed
+  </p>
+</div>
+
           <div>
-            <p>
+            <p
+              onClick={clearCompleted}
+              className="cursor-pointer text-red-500 hover:underline"
+            >
               Clear Completed
             </p>
+
           </div>
         </div>
 
