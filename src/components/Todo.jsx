@@ -64,7 +64,7 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={`p-4 grid min-h-screen bg-no-repeat
+    <div className={`p-4 grid min-h-screen bg-no-repeat w-[100%]
             ${darkMode
         ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
         : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
