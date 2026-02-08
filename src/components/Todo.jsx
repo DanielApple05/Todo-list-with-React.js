@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import todo_icon from '../assets/todo_icon.svg';
 import TodoItems from './TodoItems.jsx';
 import moonIcon from '../assets/icon-moon.svg';
 import sunIcon from '../assets/icon-sun.svg'
