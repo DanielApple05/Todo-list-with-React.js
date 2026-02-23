@@ -63,13 +63,13 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` min-h-screen  bg-no-repeat w-12/12
+    <div className={` min-h-screen bg-no-repeat w-12/12 flex place-content-center
             ${darkMode
         ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
         : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
       }  ${darkMode ? "text-white" : "text-black"}`}>
-      <div className=' xl:w-4/12 w-full justify-center place-self-center m-4 xl:px-block px-5'>
-        <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-3 justify-between '>
+      <div className='  xl:w-4/12 w-full justify-center place-self-center mt-4  xl:block px-5'>
+        <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between '>
           <h1 className=' text-white xl:text-3xl text-xl font-semibold'>To-Do List</h1>
           <div
             className="cursor-pointer"
@@ -98,7 +98,7 @@ const Todo = () => {
             ))}
           </div>
 
-          <div className={`flex justify-between p-4 shadow-xl border-t  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+          <div className={`flex justify-between p-4 shadow-xl border-t xl:text-[16px] text-[10px]  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <div>
               <p>
                 {itemsLeft} {itemsLeft === 1 ? "item" : "items"} left
