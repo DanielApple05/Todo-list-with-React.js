@@ -84,7 +84,7 @@ const Todo = () => {
 
             <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-14 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
           </div>
-          <div className={`flex flex-col shadow-2xl overflow-y-auto  ${darkMode ? "bg-[#1e223c]" : "bg-white"} h-130 w-full `}>
+          <div className={`flex flex-col shadow-2xl overflow-y-auto  ${darkMode ? "bg-[#1e223c]" : "bg-white"} xl:h-130 h-auto w-full `}>
             {filteredTodos.map((item, index) => (
               <TodoItems
                 key={item.id}
