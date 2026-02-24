@@ -65,7 +65,7 @@ const Todo = () => {
 
   return (
     <div className={` relative ${darkMode ? "text-white bg-[#1e223c]" : " bg-white "}`} >
-      <section className={`fixed top-0 left-0 w-full min-w-12/12 place-content-center xl:h-70 h-45 bg-cover bg-no-repeat flex z-50 
+      <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center xl:h-70 h-45 bg-cover bg-no-repeat flex z-50 
           ${darkMode
           ? "bg-[url('/images/bg-desktop-dark.jpg')]"
           : "bg-[url('/images/bg-desktop-light.jpg')]"
@@ -86,13 +86,12 @@ const Todo = () => {
           </div>
         </div>
       </section>
-      <div className=' xl:mt-70 mt-50 mb-15 xl:max-w-5/12 w-full place-self-center relative min-h-screen '>
+      <div className=' xl:max-w-5/12 w-full mx-auto min-h-screen'>
 
-        {filteredTodos.map((item, index) => (<div className={`flex flex-col shadow-2xl  `}>
+        {filteredTodos.map((item, index) => (<div   id={item.id} className={`flex flex-col shadow-2xl  `}>
           <TodoItems
             key={item.id}
             text={item.text}
-            id={item.id}
             isComplete={item.isComplete}
             deleteTodo={deleteTodo}
             toggle={toggle}
@@ -100,7 +99,7 @@ const Todo = () => {
            </div>))}
         
       </div>
-      <div className={`flex justify-between p-4 shadow-xl border-t z-50 fixed w-full left-0 right-0 bottom-0 xl:text-[16px] text-[10px] 
+      <div className={`flex justify-between p-4 shadow-xl border-t z-50 sticky w-full left-0 right-0 bottom-0 xl:text-[16px] text-[10px] 
             ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
         <div>
           <p>
