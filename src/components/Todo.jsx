@@ -63,7 +63,7 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` relative bg-no-repeat min-w-full flex place-content-center  
+    <div className={` overflow-hidden relative bg-no-repeat min-w-full flex place-content-center  
             ${darkMode
         ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
         : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
