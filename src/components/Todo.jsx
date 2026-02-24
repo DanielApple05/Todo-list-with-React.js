@@ -46,9 +46,10 @@ const Todo = () => {
 
   const filteredTodos = todoList.filter(todo => {
     if (filter === "completed") return todo.isComplete;
-    if (filter === "All") return todo
+    if (filter === "all") return todo;
     if (filter === "active") return !todo.isComplete;
     return true;
+    
   });
 
   const clearCompleted = () => {
@@ -63,9 +64,8 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` ${darkMode ? "text-white bg-black" : " bg-white text-black"}`} >
-      <section
-        className={`fixed top-0 left-0 w-full min-w-12/12 place-content-center xl:h-70 h-40 bg-cover bg-no-repeat flex z-50
+    <div className={`${darkMode ? "text-white bg-black" : " bg-white text-black"}`} >
+      <section className={`fixed top-0 left-0 w-full min-w-12/12    place-content-center xl:h-70 h-40 bg-cover bg-no-repeat flex z-50
           ${darkMode
             ? "bg-[url('/images/bg-desktop-dark.jpg')]"
             : "bg-[url('/images/bg-desktop-light.jpg')]"
@@ -75,8 +75,7 @@ const Todo = () => {
             <h1 className=' text-white xl:text-3xl text-xl font-semibold '>To-Do List</h1>
             <div
               className="cursor-pointer"
-              onClick={() => setDarkMode(prev => !prev)}
-            >
+              onClick={() => setDarkMode(prev => !prev)}>
               <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" className='xl:w-7 w-4' />
             </div>
           </div>
@@ -88,7 +87,7 @@ const Todo = () => {
         </div>
       </section>
       <div className=' xl:max-w-5/12 w-full place-self-center grid'>
-        <div className={`flex flex-col shadow-2xl  w-full xl:mt-70 mt-50 mb-20  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+        <div className={`flex flex-col shadow-2xl h-130 w-full xl:mt-70 mt-50 mb-20  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
           {filteredTodos.map((item, index) => (
             <TodoItems
               key={item.id}
@@ -156,8 +155,6 @@ const Todo = () => {
           </div>
         </div>
       </div>
-
-
     </div>
   );
 }
