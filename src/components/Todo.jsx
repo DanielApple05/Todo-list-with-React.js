@@ -63,28 +63,29 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` overflow-hidden relative bg-no-repeat min-w-full flex place-content-center  
+    <div className='max-w-12/12 h-screen'>
+      <div className={` overflow-hidden bg-no-repeat flex place-content-center h-screen  
             ${darkMode
-        ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
-        : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
-      }  ${darkMode ? "text-white" : "text-black"}`}>
-      <div className='  xl:w-4/12 w-full justify-center place-self-center xl:mt-4 mt-10  xl:block px-5'>
-        <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between '>
-          <h1 className=' text-white xl:text-3xl text-xl font-semibold'>To-Do List</h1>
-          <div
-            className="cursor-pointer"
-            onClick={() => setDarkMode(prev => !prev)}
-          >
-            <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" className='xl:w-7 w-4' />
+          ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
+          : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
+        } ${darkMode ? "text-white" : "text-black"}`}>
+        <div className='  xl:max-w-5/12 w-full place-self-center xl:mt-4 mt-10  xl:block px-5 '>
+          <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between '>
+            <h1 className=' text-white xl:text-3xl text-xl font-semibold'>To-Do List</h1>
+            <div
+              className="cursor-pointer"
+              onClick={() => setDarkMode(prev => !prev)}
+            >
+              <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" className='xl:w-7 w-4' />
+            </div>
           </div>
-        </div>
-        <div className=' place-self-center flex flex-col w-full rounded-xl'>
-          <div className={`flex items-center xl:mb-10 mb-15 rounded-lg  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+          <div className={`flex items-center xl:mb-10 mb-15 rounded-lg ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-14 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-14 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
           </div>
-          <div className={`flex flex-col shadow-2xl overflow-y-auto  ${darkMode ? "bg-[#1e223c]" : "bg-white"} xl:h-130 h-110 w-full `}>
+
+          <div className={`flex flex-col shadow-2xl h-130 w-full overflow-y-auto `}>
             {filteredTodos.map((item, index) => (
               <TodoItems
                 key={item.id}
@@ -97,13 +98,15 @@ const Todo = () => {
             ))}
           </div>
 
-          <div className={`flex justify-between p-4 shadow-xl border-t fixed bottom-0  left-0  right-0 xl:text-[16px] text-[10px]   ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+
+          <div className={`flex justify-between p-4 shadow-xl border-t fixed w-full left-0 right-0 bottom-0 xl:text-[16px] text-[10px] 
+            ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <div>
               <p>
                 {itemsLeft} {itemsLeft === 1 ? "item" : "items"} left
               </p>
             </div>
-            <div className="flex xl:space-x-6 space-x-2">
+            <div className="flex xl:space-x-6 space-x-2 ">
               <p
                 onClick={() => setFilter("all")}
                 className={`cursor-pointer transition-colors ${filter === "all"
@@ -151,10 +154,9 @@ const Todo = () => {
 
             </div>
           </div>
-
         </div>
-
       </div>
+
     </div>
   );
 }

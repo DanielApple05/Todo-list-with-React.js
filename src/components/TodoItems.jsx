@@ -7,7 +7,7 @@ const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
   return (
     <div className='flex xl:space-y-6 space-y-2 border-b justify-between px-4 rounded items-center '>
 
-      <div className='flex items-center pt-4'>
+      <div className='flex items-center pt-4 '>
 
         <FontAwesomeIcon icon={isComplete ? faCircleCheck : faCircleRegular} 
         onClick={() => { toggle(id) }} 
