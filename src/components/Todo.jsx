@@ -63,7 +63,7 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` min-h-screen bg-no-repeat w-12/12 flex place-content-center 
+    <div className={` min-h-screen bg-no-repeat min-w-12/12 flex place-content-center 
             ${darkMode
         ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
         : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
@@ -85,7 +85,7 @@ const Todo = () => {
 
             <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-14 h-10 text-white text-lg font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
           </div>
-          <div className={`flex flex-col  shadow-2xl   ${darkMode ? "bg-[#1e223c]" : "bg-white"} h-130 w-full `}>
+          <div className={`flex flex-col  shadow-2xl   ${darkMode ? "bg-[#1e223c]" : "bg-white"} xl:h-130 h-100 w-full `}>
             {filteredTodos.map((item, index) => (
               <TodoItems
                 key={item.id}
