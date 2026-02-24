@@ -69,8 +69,7 @@ const Todo = () => {
           ${darkMode
             ? "bg-[url('/images/bg-desktop-dark.jpg')]"
             : "bg-[url('/images/bg-desktop-light.jpg')]"
-          }`}
-      >
+          }`}>
         <div className=' flex flex-col xl:max-w-5/12 w-full place-self-center xl:mt-10 mt-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
             <h1 className=' text-white xl:text-3xl text-xl font-semibold '>To-Do List</h1>
@@ -89,7 +88,7 @@ const Todo = () => {
         </div>
       </section>
       <div className=' xl:max-w-5/12 w-full place-self-center grid'>
-        <div className={`flex flex-col shadow-2xl  w-full xl:mt-70 mt-40 mb-20  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+        <div className={`flex flex-col shadow-2xl  w-full xl:mt-70 mt-50 mb-20  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
           {filteredTodos.map((item, index) => (
             <TodoItems
               key={item.id}
