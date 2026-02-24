@@ -5,20 +5,20 @@ import { faCircleCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
   return (
-    <div className='flex space-y-6 border-b justify-between px-4 rounded items-center '>
+    <div className='flex xl:space-y-6 space-y-2 border-b justify-between px-4 rounded items-center '>
 
       <div className='flex items-center pt-4'>
 
         <FontAwesomeIcon icon={isComplete ? faCircleCheck : faCircleRegular} 
         onClick={() => { toggle(id) }} 
-        className={`text-[20px] hover:text-[#b266ff] transition-colors ${isComplete ? "text-[#b266ff]" : "text-gray-400"}`} />
+        className={`xl:text-[20px] text-[14px] hover:text-[#b266ff] transition-colors ${isComplete ? "text-[#b266ff]" : "text-gray-400"}`} />
 
-        <p className={`ml-4 text-[19px] decoration-slate-100 ${isComplete ? "text-red-500 line-through" : ""}`}>
+        <p className={`xl:ml-4 ml-2 xl:text-[19px] text-[14px] decoration-slate-100 ${isComplete ? "text-red-500 line-through" : ""}`}>
           {text}
         </p>
       </div>
 
-      <FontAwesomeIcon icon={faTrash} className='w-4 cursor-pointer text-purple-500 transition-colors hover:text-red-500' onClick={() => deleteTodo(id)} />
+      <FontAwesomeIcon icon={faTrash} className=' cursor-pointer text-purple-500 transition-colors hover:text-red-500' onClick={() => deleteTodo(id)} />
 
     </div>
   );
