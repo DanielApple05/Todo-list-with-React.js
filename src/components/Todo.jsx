@@ -77,15 +77,14 @@ const Todo = () => {
           >
             <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" className='xl:w-7 w-4'/>
           </div>
-
         </div>
-        <div className=' place-self-center flex flex-col w-full rounded-xl'>
+        <div className=' place-self-center flex flex-col w-full rounded-xl '>
           <div className={`flex items-center mb-10 rounded-lg  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-14 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-14 h-10 text-white text-lg font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
           </div>
-          <div className={`flex flex-col  shadow-2xl   ${darkMode ? "bg-[#1e223c]" : "bg-white"} xl:h-130 h-140 w-full `}>
+          <div className={`flex flex-col  shadow-2xl overflow-y-auto  ${darkMode ? "bg-[#1e223c]" : "bg-white"} xl:h-130 h-140 w-full `}>
             {filteredTodos.map((item, index) => (
               <TodoItems
                 key={item.id}
