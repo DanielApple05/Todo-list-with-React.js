@@ -69,7 +69,7 @@ const Todo = () => {
           ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
           : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
         } ${darkMode ? "text-white" : "text-black"}`}>
-        <div className='  xl:max-w-5/12 w-full place-self-center xl:mt-4 mt-10  xl:block px-5 '>
+        <div className='  xl:max-w-5/12 w-full place-self-center xl:mt-4 mt-10  xl:block px-5 grid '>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between '>
             <h1 className=' text-white xl:text-3xl text-xl font-semibold'>To-Do List</h1>
             <div
@@ -85,7 +85,7 @@ const Todo = () => {
             <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-14 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
           </div>
 
-          <div className={`flex flex-col shadow-2xl h-130 w-full overflow-y-auto  `}>
+          <div className={`flex flex-col shadow-2xl xl:h-130 h-70 w-full overflow-y-auto  `}>
             {filteredTodos.map((item, index) => (
               <TodoItems
                 key={item.id}
