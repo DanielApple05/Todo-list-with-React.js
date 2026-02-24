@@ -63,7 +63,7 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` min-h-screen bg-no-repeat w-12/12 flex place-content-center
+    <div className={` min-h-screen bg-no-repeat w-12/12 flex place-content-center 
             ${darkMode
         ? "bg-[#1c2033] bg-[url('/images/bg-desktop-dark.jpg')]"
         : "bg-white bg-[url('/images/bg-desktop-light.jpg')]"
@@ -79,11 +79,11 @@ const Todo = () => {
           </div>
 
         </div>
-        <div className=' place-self-center flex flex-col w-full  min-h-screen rounded-xl'>
+        <div className=' place-self-center flex flex-col w-full rounded-xl'>
           <div className={`flex items-center mb-10 rounded-lg  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
-            <input ref={inputRef} className=' border-0 outline-none flex-1 h-14 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
+            <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-14 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
-            <button onClick={add} className='border-none rounded-lg bg-[#b266ff] w-32 h-14 text-white text-lg font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
+            <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-14 h-10 text-white text-lg font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
           </div>
           <div className={`flex flex-col  shadow-2xl   ${darkMode ? "bg-[#1e223c]" : "bg-white"} h-130 w-full `}>
             {filteredTodos.map((item, index) => (
