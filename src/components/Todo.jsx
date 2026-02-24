@@ -87,7 +87,7 @@ const Todo = () => {
         </div>
       </section>
       <div className=' xl:max-w-5/12 w-full place-self-center grid'>
-        <div className={`flex flex-col shadow-2xl h-130 w-full xl:mt-70 mt-50 mb-20  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+        <div className={`flex flex-col shadow-2xl w-full xl:mt-70 mt-40 mb-20  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
           {filteredTodos.map((item, index) => (
             <TodoItems
               key={item.id}
