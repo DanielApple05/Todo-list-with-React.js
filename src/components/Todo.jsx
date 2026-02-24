@@ -79,7 +79,7 @@ const Todo = () => {
               <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" className='xl:w-7 w-4' />
             </div>
           </div>
-          <div className={`flex items-center xl:mb-10 mb-15 rounded-lg xl:px-block px-5 ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+          <div className={`flex items-center xl:mb-10 mb-15 rounded-lg xl:px-0 px-5 ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-14 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-14 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
