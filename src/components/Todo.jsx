@@ -64,7 +64,7 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` relative ${darkMode ? "text-white bg-[#1e223c]" : " bg-white "}`} >
+    <div className={` relative ${darkMode ? "text-white bg-black" : " bg-white "}`} >
       <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center xl:h-70 h-45 bg-cover bg-no-repeat flex z-50 
           ${darkMode
           ? "bg-[url('/images/bg-desktop-dark.jpg')]"
@@ -86,7 +86,7 @@ const Todo = () => {
           </div>
         </div>
       </section>
-      <div className='xl:max-w-5/12 w-full mx-auto min-h-screen'>
+      <div className={`xl:max-w-5/12 w-full mx-auto min-h-screen shadow-2xl mb-10 ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
         {filteredTodos.map((item) => (
           <TodoItems
             key={item.id}
