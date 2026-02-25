@@ -86,20 +86,19 @@ const Todo = () => {
           </div>
         </div>
       </section>
-      <div className=' xl:max-w-5/12 w-full mx-auto min-h-screen'>
-
-        {filteredTodos.map((item, index) => (<div   id={item.id} className={`flex flex-col shadow-2xl  `}>
+      <div className='xl:max-w-5/12 w-full mx-auto min-h-screen'>
+        {filteredTodos.map((item) => (
           <TodoItems
             key={item.id}
+            id={item.id}
             text={item.text}
             isComplete={item.isComplete}
             deleteTodo={deleteTodo}
             toggle={toggle}
           />
-           </div>))}
-        
+        ))}
       </div>
-      <div className={`flex justify-between p-4 shadow-xl border-t z-50 sticky w-full left-0 right-0 bottom-0 xl:text-[16px] text-[10px] 
+      <div className={`flex justify-between p-4 shadow-xl border-t z-50 fixed w-full left-0 right-0 bottom-0 xl:text-[16px] text-[10px] 
             ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
         <div>
           <p>
