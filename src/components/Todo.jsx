@@ -1,11 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TodoItems from './TodoItems.jsx';
 import moonIcon from '../assets/icon-moon.svg';
 import sunIcon from '../assets/icon-sun.svg'
 
-
 const Todo = () => {
-
   const [todoList, setTodoList] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
   const inputRef = useRef();
   const add = () => {
@@ -30,7 +28,7 @@ const Todo = () => {
 
   const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
   );
-
+  
   const toggle = (id) => {
     setTodoList((prevTodos) => {
       return prevTodos.map((todo) => {
