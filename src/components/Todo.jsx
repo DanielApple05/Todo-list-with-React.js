@@ -28,7 +28,7 @@ const Todo = () => {
 
   const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
   );
-  
+
   const toggle = (id) => {
     setTodoList((prevTodos) => {
       return prevTodos.map((todo) => {
@@ -96,7 +96,7 @@ const Todo = () => {
           />
         ))}
       </div>
-      <div className={` xl:m-w-5/12 min-w-full flex justify-between p-4 shadow-xl border-t z-50 sticky  bottom-0 xl:text-[16px] text-[10px] 
+      <div className={` xl:w-5/12 w-full flex justify-between p-4 shadow-xl border-t z-50 sticky place-self-center bottom-0 xl:text-[16px] text-[10px] 
             ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
         <div>
           <p>
