@@ -64,15 +64,15 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` relative ${darkMode ? "text-white bg-black" : " bg-white "}`} >
-      <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center xl:h-70 h-45 bg-cover bg-no-repeat flex z-50 
+    <div className={` w-full relative ${darkMode ? "text-white bg-black" : " bg-white "}`} >
+      <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center xl:h-40 h-45 bg-cover bg-no-repeat flex z-50 
           ${darkMode
           ? "bg-[url('/images/bg-desktop-dark.jpg')]"
           : "bg-[url('/images/bg-desktop-light.jpg')]"
         }`}>
         <div className=' flex flex-col xl:max-w-5/12 w-full place-self-center xl:mt-10 mt-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
-            <h1 className=' text-white xl:text-3xl text-xl font-semibold '>To-Do List</h1>
+            <h1 className=' text-white xl:text-3xl text-xl font-semibold '>To-Do List</h1> 
             <div
               className="cursor-pointer"
               onClick={() => setDarkMode(!darkMode)}>
@@ -98,7 +98,7 @@ const Todo = () => {
           />
         ))}
       </div>
-      <div className={`flex justify-between p-4 shadow-xl border-t z-50 fixed w-full left-0 right-0 bottom-0 xl:text-[16px] text-[10px] 
+      <div className={` xl:m-w-5/12 min-w-full flex justify-between p-4 shadow-xl border-t z-50 fixed place-self-center bottom-0 xl:text-[16px] text-[10px] 
             ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
         <div>
           <p>
