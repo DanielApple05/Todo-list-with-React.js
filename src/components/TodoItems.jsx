@@ -5,8 +5,8 @@ import { faCircleCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
   return (
-    <div className='flex xl:space-y-4 space-y-2 border-b justify-between px-4 rounded items-center  xl:text-[16px] text-[14px] '>
-      <div className='flex items-center pt-4 '>
+    <div className=' relative flex border-b justify-between xl:p-4 p-2 rounded items-center  xl:text-[16px] text-[14px]  '>
+      <div className='flex items-center relative'>
         <FontAwesomeIcon icon={isComplete ? faCircleCheck : faCircleRegular} 
         onClick={() => { toggle(id) }} 
         className={`cursor-pointer hover:text-[#b266ff] transition-colors ${isComplete ? "text-[#b266ff]" : "text-gray-400"}`} />
@@ -15,7 +15,6 @@ const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
           {text}
         </p>
       </div>
-
       <FontAwesomeIcon icon={faTrash} className=' cursor-pointer text-purple-500 transition-colors hover:text-red-500' onClick={() => deleteTodo(id)} />
 
     </div>
