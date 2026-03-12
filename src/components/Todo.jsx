@@ -62,7 +62,7 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` w-full relative ${darkMode ? "text-white bg-black" : " bg-white "}`} >
+    <div className={` w-full relative min-h-screen ${darkMode ? "text-white bg-black" : " bg-white "}`} >
       <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center  bg-cover bg-no-repeat flex  xl:h-40 h-45 z-50 xl:text-[16px] text-[14px]   
           ${darkMode
           ? "bg-[url('/images/bg-desktop-dark.jpg')]"
