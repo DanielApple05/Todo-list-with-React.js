@@ -63,10 +63,10 @@ const Todo = () => {
 
   return (
     <div className={` w-full relative ${darkMode ? "text-white bg-black" : " bg-white "}`} >
-      <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center  bg-cover bg-no-repeat flex z-50 xl:text-[16px] text-[14px]   
+      <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center  bg-cover bg-no-repeat flex  xl:h-40 h-45 z-50 xl:text-[16px] text-[14px]   
           ${darkMode
-          ? "bg-[url('/images/bg-desktop-dark.jpg')] xl:h-40 h-45"
-          : "bg-[url('/images/bg-desktop-light.jpg')] xl:h-40 h-45"
+          ? "bg-[url('/images/bg-desktop-dark.jpg')]"
+          : "bg-[url('/images/bg-desktop-light.jpg')]"
         }`}>
         <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15 mb-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
@@ -84,7 +84,7 @@ const Todo = () => {
           </div>
         </div>
       </section>
-      <div className={`xl:w-5/12 w-full mx-auto min-h-screen relative shadow-2xl ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
+      <div className={`xl:w-5/12 w-full mx-auto xl:min-h-97 min-h-158 shadow-2xl ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
         {filteredTodos.map((item) => (
           <TodoItems
             key={item.id}

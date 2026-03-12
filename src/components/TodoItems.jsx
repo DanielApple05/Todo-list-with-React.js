@@ -16,7 +16,6 @@ const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
         </p>
       </div>
       <FontAwesomeIcon icon={faTrash} className=' cursor-pointer text-purple-500 transition-colors hover:text-red-500' onClick={() => deleteTodo(id)} />
-
     </div>
   );
 }
