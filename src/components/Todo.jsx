@@ -62,13 +62,13 @@ const Todo = () => {
   }, [darkMode]);
 
   return (
-    <div className={` w-full z-50 relative ${darkMode ? "text-white bg-black" : " bg-white "}`} >
-      <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center xl:h-40 h-45 bg-cover bg-no-repeat flex z-50  xl:text-[16px] text-[14px]  
+    <div className={` w-full relative ${darkMode ? "text-white bg-black" : " bg-white "}`} >
+      <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center  bg-cover bg-no-repeat flex z-50 xl:text-[16px] text-[14px]   
           ${darkMode
-          ? "bg-[url('/images/bg-desktop-dark.jpg')]"
-          : "bg-[url('/images/bg-desktop-light.jpg')]"
+          ? "bg-[url('/images/bg-desktop-dark.jpg')] xl:h-40 h-45"
+          : "bg-[url('/images/bg-desktop-light.jpg')] xl:h-40 h-45"
         }`}>
-        <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15'>
+        <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15 mb-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
             <h1 className=' text-white xs:text-3xl text-xl font-semibold '>To-Do List</h1> 
             <div
@@ -77,7 +77,7 @@ const Todo = () => {
               <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" className='xl:w-7 w-4' />
             </div>
           </div>
-          <div className={`flex items-center mb-15 rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
+          <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-12 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
