@@ -84,7 +84,7 @@ const Todo = () => {
           </div>
         </div>
       </section>
-      <div className={`xl:w-5/12 w-full mx-auto min-h-97 shadow-2xl ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
+      <div className={`xl:w-5/12 w-full mx-auto xl:max-h-97 min-h-160 shadow-2xl ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
         {filteredTodos.map((item) => (
           <TodoItems
             key={item.id}
