@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import TodoItems from './TodoItems.jsx';
 import moonIcon from '../assets/icon-moon.svg';
+import TodoItems from './TodoItems'
 import sunIcon from '../assets/icon-sun.svg'
 
 const Todo = () => {
   const [todoList, setTodoList] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
+
   const inputRef = useRef();
   const add = () => {
     const inputText = inputRef.current.value.trim();
@@ -42,12 +43,12 @@ const Todo = () => {
   const [filter, setFilter] = useState("all");
   const itemsLeft = todoList.filter(todo => !todo.isComplete).length;
 
-  const filteredTodos = todoList.filter(todo => {
+  const filteredTodos = todoList.filter(todo => { 
     if (filter === "completed") return todo.isComplete;
     if (filter === "all") return todo;
     if (filter === "active") return !todo.isComplete;
     return true;
-
+   
   });
 
   const clearCompleted = () => {
@@ -70,7 +71,7 @@ const Todo = () => {
         }`}>
         <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15 mb-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
-            <h1 className=' text-white xs:text-3xl text-xl font-semibold '>To-Do List</h1> 
+            <h1 className=' text-white xs:text-3xl text-xl font-semibold '>To-Do List</h1>
             <div
               className="cursor-pointer"
               onClick={() => setDarkMode(!darkMode)}>
@@ -85,7 +86,13 @@ const Todo = () => {
         </div>
       </section>
       <div className={`xl:w-5/12 w-full mx-auto xl:min-h-160 min-h-171 shadow-2xl ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
-        {filteredTodos.map((item) => (
+        {filteredTodos.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-10 text-gray-400">
+          <p className="text-lg font-semibold">No todos yet</p>
+          <p className="text-sm">Add a task to get started 🚀</p>
+        </div>
+        ) : 
+        (filteredTodos.map((item) => (
           <TodoItems
             key={item.id}
             id={item.id}
@@ -94,7 +101,7 @@ const Todo = () => {
             deleteTodo={deleteTodo}
             toggle={toggle}
           />
-        ))}
+        ))) }
       </div>
       <div className={` xl:w-5/12 w-full flex justify-between p-2 shadow-xl border-t z-50 sticky place-self-center bottom-0 xl:text-[14px] text-[10px] 
             ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>

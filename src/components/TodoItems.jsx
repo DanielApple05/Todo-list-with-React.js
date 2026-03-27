@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle as faCircleRegular } from "@fortawesome/free-regular-svg-icons";
 import { faCircleCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, }) => {
+  
   return (
     <div className='flex border-b justify-between xl:p-4 p-2 rounded items-center  xl:text-[16px] text-[14px] '>
       <div className='flex items-center'>
