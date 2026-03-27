@@ -89,7 +89,7 @@ const Todo = () => {
         {filteredTodos.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-gray-400">
           <p className="text-lg font-semibold">No todos yet</p>
-          <p className="text-sm">Add a task to get started 🚀</p>
+          <p className="text-sm">Add a task to get started...</p>
         </div>
         ) : 
         (filteredTodos.map((item) => (
