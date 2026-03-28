@@ -1,18 +1,21 @@
+// Imports
 const express = require("express");
 const cors = require("cors");
 
+// App configuration
 const app = express();
+const PORT = 5000;
 
-// middleware
+// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // lets us handle JSON request bodies
 
-
+// Test route
 app.get("/", (req, res) => {
-  res.send("API is working");
+  res.send("API is running 🚀");
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
