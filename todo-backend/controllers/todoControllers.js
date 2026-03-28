@@ -28,4 +28,4 @@ const deleteTodo = (req, res) => {
   }
 };
 
-module.exports = { getTodos, addTodo, deleteTodo };
+module.exports = { getTodos, addTodo, deleteTodo } ; 
