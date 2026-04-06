@@ -7,50 +7,65 @@ const Todo = () => {
 
   const [todoList, setTodoList] = useState([]);
   // const [todoList, setTodoList] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
+  useEffect(() => {
+    fetch("http://localhost:5000/todos")
+      .then(res => res.json())
+      .then(data => setTodoList(data))
+      .catch(err => console.error(err));
+  }, []);
 
   const inputRef = useRef();
-  const add = () => {
+  const add = async () => {
     const inputText = inputRef.current.value.trim();
-    if (inputText === "") {
-      return null;
-    }
-    const newTodo = {
-      id: Date.now(),
-      text: inputText,
-      isComplete: false,
-    }
-    setTodoList((prev) => [...prev, newTodo])
+    if (inputText === "") return;
+
+    const res = await fetch("http://localhost:5000/todos", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text: inputText }),
+    });
+
+    const newTodo = await res.json();
+
+    setTodoList((prev) => [...prev, newTodo]);
     inputRef.current.value = "";
-  }
-  const deleteTodo = (id) => {
-    setTodoList((prvTodos) => {
-      return prvTodos.filter((todo) => todo.id !== id)
-    }
-    )
-  }
+  };
+  const deleteTodo = async (id) => {
+    await fetch(`http://localhost:5000/todos/${id}`, {
+      method: "DELETE",
+    });
+
+    setTodoList((prev) => prev.filter((todo) => todo.id !== id));
+  };
 
   const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
   );
 
-  const toggle = (id) => {
-    setTodoList((prevTodos) => {
-      return prevTodos.map((todo) => {
-        if (todo.id === id) {
-          return { ...todo, isComplete: !todo.isComplete }
-        }
-        return todo;
-      })
-    })
-  }
+  const toggle = async (id) => {
+    const res = await fetch(`http://localhost:5000/todos/${id}`, {
+      method: "PATCH",
+    });
+
+    const updatedTodo = await res.json();
+
+    setTodoList((prev) =>
+      prev.map((todo) =>
+        todo.id === id ? updatedTodo : todo
+      )
+    );
+  };
+
   const [filter, setFilter] = useState("all");
   const itemsLeft = todoList.filter(todo => !todo.isComplete).length;
 
-  const filteredTodos = todoList.filter(todo => { 
+  const filteredTodos = todoList.filter(todo => {
     if (filter === "completed") return todo.isComplete;
     if (filter === "all") return todo;
     if (filter === "active") return !todo.isComplete;
     return true;
-   
+
   });
 
   const clearCompleted = () => {
@@ -90,20 +105,20 @@ const Todo = () => {
       <div className={`xl:w-5/12 w-full mx-auto xl:min-h-160 min-h-171 shadow-2xl ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
         {filteredTodos.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10 text-gray-400">
-          <p className="text-lg font-semibold">No todos yet</p>
-          <p className="text-sm">Add a task to get started...</p>
-        </div>
-        ) : 
-        (filteredTodos.map((item) => (
-          <TodoItems
-            key={item.id}
-            id={item.id}
-            text={item.text}
-            isComplete={item.isComplete}
-            deleteTodo={deleteTodo}
-            toggle={toggle}
-          />
-        ))) }
+            <p className="text-lg font-semibold">No todos yet</p>
+            <p className="text-sm">Add a task to get started...</p>
+          </div>
+        ) :
+          (filteredTodos.map((item) => (
+            <TodoItems
+              key={item.id}
+              id={item.id}
+              text={item.text}
+              isComplete={item.isComplete}
+              deleteTodo={deleteTodo}
+              toggle={toggle}
+            />
+          )))}
       </div>
       <div className={` xl:w-5/12 w-full flex justify-between p-2 shadow-xl border-t z-50 sticky place-self-center bottom-0 xl:text-[14px] text-[10px] 
             ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>

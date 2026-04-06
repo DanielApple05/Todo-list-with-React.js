@@ -12,7 +12,7 @@ app.use(express.json());
 // Test route
 app.get("/", (req, res) => {
   res.send("API is running 🚀");
-});
+}); 
 
 // Todo routes
 app.use("/todos", todoRoutes);

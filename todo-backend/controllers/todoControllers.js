@@ -10,6 +10,7 @@ const addTodo = (req, res) => {
   const newTodo = {
     id: Date.now(),       // simple unique ID
     text: req.body.text,  // from request body
+    isComplete: false  
   };
   todos.push(newTodo);
   res.status(201).json(newTodo);
@@ -28,4 +29,17 @@ const deleteTodo = (req, res) => {
   }
 };
 
-module.exports = { getTodos, addTodo, deleteTodo } ; 
+const toggleTodo = (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const todo = todos.find(t => t.id === id);
+
+  if (!todo) {
+    return res.status(404).json({ message: "Todo not found" });
+  }
+
+  todo.isComplete = !todo.isComplete;
+
+  res.json(todo); // ✅ VERY IMPORTANT
+};
+module.exports = { getTodos, addTodo,  deleteTodo, toggleTodo, } ; 
