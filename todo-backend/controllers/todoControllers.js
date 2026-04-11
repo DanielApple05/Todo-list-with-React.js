@@ -10,7 +10,8 @@ const addTodo = (req, res) => {
   const newTodo = {
     id: Date.now(),       // simple unique ID
     text: req.body.text,  // from request body
-    isComplete: false  
+    createdAt: new Date().toISOString(),
+    isComplete: false
   };
   todos.push(newTodo);
   res.status(201).json(newTodo);

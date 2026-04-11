@@ -6,7 +6,7 @@ import sunIcon from '../assets/icon-sun.svg'
 const Todo = () => {
 
   const [todoList, setTodoList] = useState([]);
-  // const [todoList, setTodoList] = useState(localStorage.getItem("todos") ? JSON.parse(localStorage.getItem("todos")) : []);
+ 
   useEffect(() => {
     fetch("http://localhost:5000/todos")
       .then(res => res.json())
@@ -115,6 +115,7 @@ const Todo = () => {
               id={item.id}
               text={item.text}
               isComplete={item.isComplete}
+              createdAt={item.createdAt}
               deleteTodo={deleteTodo}
               toggle={toggle}
             />
