@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle as faCircleRegular } from "@fortawesome/free-regular-svg-icons";
 import { faCircleCheck, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, createdAt }) => {
+const TodoItems = ({ text, isComplete, deleteTodo, toggle, createdAt }) => {
 
   const formatDate = (date) => {
     return new Date(date).toLocaleString("en-US", {
@@ -26,7 +26,7 @@ const TodoItems = ({ text, id, isComplete, deleteTodo, toggle, createdAt }) => {
         <p className='text-[8px]'>{formatDate(createdAt)}</p>
       </div>
       </div>
-      <FontAwesomeIcon icon={faTrash} className=' cursor-pointer text-purple-500 transition-colors hover:text-red-500' onClick={() => deleteTodo(id)} />
+      <FontAwesomeIcon icon={faTrash} className=' cursor-pointer text-purple-500 transition-colors hover:text-red-500' onClick={() => deleteTodo(todo._id)} />
     </div>
   );
 }

@@ -1,46 +1,51 @@
-const todos = require("../data/todos");
+const Todo = require("../models/Todo");
 
 // GET all todos
-const getTodos = (req, res) => {
+const getTodos = async (req, res) => {
+  const todos = await Todo.find().sort({ createdAt: -1 });
   res.json(todos);
 };
 
-// POST (add) a todo
-const addTodo = (req, res) => {
-  const newTodo = {
-    id: Date.now(),       // simple unique ID
-    text: req.body.text,  // from request body
-    createdAt: new Date().toISOString(),
-    isComplete: false
-  };
-  todos.push(newTodo);
-  res.status(201).json(newTodo);
+// CREATE todo
+const createTodo = async (req, res) => {
+  try {
+    const todo = await Todo.create({
+      text: req.body.text,
+    });
+
+    res.status(201).json(todo);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
-// DELETE a todo
-const deleteTodo = (req, res) => {
-  const id = parseInt(req.params.id);
-  const index = todos.findIndex(todo => todo.id === id);
-
-  if (index !== -1) {
-    todos.splice(index, 1);
+// DELETE todo
+const deleteTodo = async (req, res) => {
+  try {
+    await Todo.findByIdAndDelete(req.params.id);
     res.json({ message: "Todo deleted" });
-  } else {
-    res.status(404).json({ message: "Todo not found" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 };
 
-const toggleTodo = (req, res) => {
-  const id = parseInt(req.params.id);
+// TOGGLE todo
+const toggleTodo = async (req, res) => {
+  try {
+    const todo = await Todo.findById(req.params.id);
 
-  const todo = todos.find(t => t.id === id);
+    todo.completed = !todo.completed;
+    await todo.save();
 
-  if (!todo) {
-    return res.status(404).json({ message: "Todo not found" });
+    res.json(todo);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-
-  todo.isComplete = !todo.isComplete;
-
-  res.json(todo); // ✅ VERY IMPORTANT
 };
-module.exports = { getTodos, addTodo,  deleteTodo, toggleTodo, } ; 
+
+module.exports = {
+  getTodos,
+  createTodo,
+  deleteTodo,
+  toggleTodo,
+};

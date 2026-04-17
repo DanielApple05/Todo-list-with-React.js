@@ -32,13 +32,14 @@ const Todo = () => {
     setTodoList((prev) => [...prev, newTodo]);
     inputRef.current.value = "";
   };
-  const deleteTodo = async (id) => {
-    await fetch(`http://localhost:5000/todos/${id}`, {
-      method: "DELETE",
-    });
 
-    setTodoList((prev) => prev.filter((todo) => todo.id !== id));
-  };
+const deleteTodo = async (_id) => {
+  await fetch(`http://localhost:5000/todos/${_id}`, {
+    method: "DELETE",
+  });
+
+  setTodoList((prev) => prev.filter((todo) => todo._id !== _id));
+};
 
   const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
   );
