@@ -6,7 +6,6 @@ import sunIcon from '../assets/icon-sun.svg'
 const Todo = () => {
 
   const [todoList, setTodoList] = useState([]);
-
   useEffect(() => {
     fetch("http://localhost:5000/todos")
       .then(res => res.json())
