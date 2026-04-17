@@ -4,12 +4,15 @@ const cors = require("cors");
 const todoRoutes = require("./routes/todos");
 import mongoose from "mongoose";
 
+const PORT = process.env.PORT || 5000;
+const mongoose = require('mongoose');
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch(err => console.log(err));
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+
 
 // Middleware
 app.use(cors());
