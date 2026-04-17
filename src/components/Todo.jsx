@@ -3,11 +3,13 @@ import moonIcon from '../assets/icon-moon.svg';
 import TodoItems from './TodoItems'
 import sunIcon from '../assets/icon-sun.svg'
 
+
 const Todo = () => {
+  const API_URL = import.meta.env.VITE_API_URL;
 
   const [todoList, setTodoList] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/todos")
+    fetch(`${API_URL}/todos`)
       .then(res => res.json())
       .then(data => setTodoList(data))
       .catch(err => console.error(err));
@@ -18,7 +20,7 @@ const Todo = () => {
     const inputText = inputRef.current.value.trim();
     if (inputText === "") return;
 
-    const res = await fetch("http://localhost:5000/todos", {
+    const res = await fetch(`${API_URL}/todos`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +35,7 @@ const Todo = () => {
   };
 
   const deleteTodo = async (_id) => {
-    await fetch(`http://localhost:5000/todos/${_id}`, {
+    await fetch(`${API_URL}/todos/${_id}`, {
       method: "DELETE",
     });
     setTodoList((prev) => prev.filter((todo) => todo._id !== _id));
@@ -43,7 +45,7 @@ const Todo = () => {
   );
 
   const toggle = async (id) => {
-    const res = await fetch(`http://localhost:5000/todos/${id}`, {
+    const res = await fetch(`${API_URL}/todos/${id}`, {
       method: "PATCH",
     });
     const updatedTodo = await res.json();
