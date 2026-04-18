@@ -19,7 +19,6 @@ const Todo = () => {
   const add = async () => {
     const inputText = inputRef.current.value.trim();
     if (inputText === "") return;
-
     const res = await fetch(`${API_URL}/todos`, {
       method: "POST",
       headers: {
