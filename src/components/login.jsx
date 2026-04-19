@@ -4,7 +4,7 @@ const login = () => {
   const [loggedIn, setLoggedIn] = React.useState(false);
   return (
     <div className="flex items-center justify-center h-screen bg-[url('../images/login-background.png')] bg-cover bg-no-repeat">
-      <div className='bg-white p-10 rounded-lg shadow-xl w-5/12 h-2.5/4 '>
+      <div className='bg-white p-10 rounded-lg shadow-xl xl:w-5/12 w-10/12 xl:h-2.5/4 '>
         <h2 className='text-2xl font-bold text-center'>
           {loggedIn ? "Welcome Back!" : "Please Log In"}
         </h2>
