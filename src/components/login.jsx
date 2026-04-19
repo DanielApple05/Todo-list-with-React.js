@@ -60,7 +60,7 @@ const login = () => {
           )}
           <button type='submit' className='bg-purple-500 text-white py-2 px-4 rounded-md w-full cursor-pointer'>{loggedIn ? "Sign Up" : "Log In"}</button>
         </form>
-        <p>
+        <p className='text-[12px]'>
           {loggedIn ? "Already have an account?" : "Don't have an account?"} <span className='text-blue-500 cursor-pointer' onClick={() => setLoggedIn(!loggedIn)}>{loggedIn ? "Log In" : "Sign Up"}</span>
         </p>
       </div>
