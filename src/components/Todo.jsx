@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import moonIcon from '../assets/icon-moon.svg';
-import TodoItems from './TodoItems'
+import TodoItems from './TodoItems';
 import sunIcon from '../assets/icon-sun.svg'
 
 
@@ -54,10 +54,8 @@ const Todo = () => {
       )
     );
   };
-
   const [filter, setFilter] = useState("all");
   const itemsLeft = todoList.filter(todo => !todo.isComplete).length;
-
   const filteredTodos = todoList.filter(todo => {
     if (filter === "completed") return todo.isComplete;
     if (filter === "all") return todo;
@@ -65,11 +63,9 @@ const Todo = () => {
     return true;
 
   });
-
   const clearCompleted = () => {
     setTodoList(todoList.filter(todo => !todo.isComplete));
   };
-
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(darkMode));
   }, [darkMode]);
