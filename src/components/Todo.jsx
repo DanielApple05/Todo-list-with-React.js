@@ -26,7 +26,7 @@ const Todo = () => {
       },
       body: JSON.stringify({ text: inputText }),
     });
-
+    
     const newTodo = await res.json();
 
     setTodoList((prev) => [...prev, newTodo]);
