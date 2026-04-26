@@ -29,7 +29,7 @@ const login = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const url = loggenIn ? "http://localhost:5000/api/auth/signup"
+        const url = loggedIn ? "http://localhost:5000/api/auth/signup"
           : "http://localhost:5000/api/auth/login";
 
         const res = await fetch(url, {
@@ -55,7 +55,7 @@ const login = () => {
       } catch (err) {
         console.log("Error:", err);
       }
-    }
+    }}
 
     return (
       <div className="flex items-center justify-center h-screen bg-[url('../images/login-background.png')] bg-cover bg-no-repeat">
