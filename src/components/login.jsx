@@ -30,7 +30,7 @@ const login = () => {
     if (Object.keys(newErrors).length === 0) {
       try {
         const url = loggedIn ? "http://localhost:5000/api/auth/signup"
-          : "http://localhost:5000/api/auth/login";
+          : "http://localhost:5000/api/auth/Login";
 
         const res = await fetch(url, {
           method: "POST",

@@ -5,15 +5,30 @@ import sunIcon from '../assets/icon-sun.svg'
 
 
 const Todo = () => {
+  const token = localStorage.getItem("token");
   const API_URL = import.meta.env.VITE_API_URL;
 
   const [todoList, setTodoList] = useState([]);
   useEffect(() => {
-    fetch(`${API_URL}/todos`)
-      .then(res => res.json())
-      .then(data => setTodoList(data))
-      .catch(err => console.error(err));
-  }, []);
+  const fetchTodos = async () => {
+    try {
+      const res = await fetch(`${API_URL}/todos`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      const data = await res.json();
+      setTodoList(data);
+
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  fetchTodos();
+}, []);
+
 
   const inputRef = useRef();
   const add = async () => {
@@ -23,6 +38,7 @@ const Todo = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({ text: inputText }),
     });
@@ -36,6 +52,9 @@ const Todo = () => {
   const deleteTodo = async (_id) => {
     await fetch(`${API_URL}/todos/${_id}`, {
       method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     setTodoList((prev) => prev.filter((todo) => todo._id !== _id));
   };
@@ -46,6 +65,9 @@ const Todo = () => {
   const toggle = async (id) => {
     const res = await fetch(`${API_URL}/todos/${id}`, {
       method: "PATCH",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
     const updatedTodo = await res.json();
     setTodoList((prev) =>
