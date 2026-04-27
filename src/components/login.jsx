@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const login = () => {
+   const API_URL = import.meta.env.VITE_API_URL;
 
   const navigate = useNavigate();
 
@@ -29,8 +30,8 @@ const login = () => {
 
     if (Object.keys(newErrors).length === 0) {
       try {
-        const url = loggedIn ? "http://localhost:5000/api/auth/signup"
-          : "http://localhost:5000/api/auth/Login";
+        const url = loggedIn ? `${API_URL}/auth/signup`
+          : `${API_URL}/auth/login`;
 
         const res = await fetch(url, {
           method: "POST",
