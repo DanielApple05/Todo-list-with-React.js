@@ -7,48 +7,54 @@ import sunIcon from '../assets/icon-sun.svg'
 const Todo = () => {
   const token = localStorage.getItem("token");
   const API_URL = import.meta.env.VITE_API_URL;
-  const [ isAdding, setIsAdding ] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [todoList, setTodoList] = useState([]);
   useEffect(() => {
-  const fetchTodos = async () => {
-    try {
-      const res = await fetch(`${API_URL}/todos`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const fetchTodos = async () => {
+      try {
+        setIsLoading(true);
+        const res = await fetch(`${API_URL}/todos`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-      const data = await res.json();
-      setTodoList(data);
+        const data = await res.json();
+        setTodoList(data);
 
-    } catch (err) {
-      console.error(err);
-    }
-  };
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setIsLoading(false);
+      }
+      
+    };
 
-  fetchTodos();
-}, []);
+    fetchTodos();
+  }, []);
 
 
   const inputRef = useRef();
   const add = async () => {
     const inputText = inputRef.current.value.trim();
     if (inputText === "") return;
-    try {      setIsAdding(true);
-    const res = await fetch(`${API_URL}/todos`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ text: inputText }),
-    });
-    
-    const newTodo = await res.json();
+    try {
+      setIsAdding(true);
+      const res = await fetch(`${API_URL}/todos`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ text: inputText }),
+      });
 
-    setTodoList((prev) => [...prev, newTodo]);
-    inputRef.current.value = "";
+      const newTodo = await res.json();
+
+      setTodoList((prev) => [...prev, newTodo]);
+      inputRef.current.value = "";
     } catch (err) {
       console.error(err);
     } finally {
@@ -69,8 +75,8 @@ const Todo = () => {
   const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
   );
 
-  const toggle = async (id) => {
-    const res = await fetch(`${API_URL}/todos/${id}`, {
+  const toggle = async (_id) => {
+    const res = await fetch(`${API_URL}/todos/${_id}`, {
       method: "PATCH",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -79,7 +85,7 @@ const Todo = () => {
     const updatedTodo = await res.json();
     setTodoList((prev) =>
       prev.map((todo) =>
-        todo._id === id ? updatedTodo : todo
+        todo._id === _id ? updatedTodo : todo
       )
     );
   };
@@ -118,31 +124,32 @@ const Todo = () => {
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
-            <button 
-            onClick={add}
-            disabled={isAdding}
-             className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-12 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>{isAdding ? "Adding todo..." : "ADD +"}</button>
+            <button
+              onClick={add}
+              disabled={isAdding}
+              className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-12 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>{isAdding ? "Adding todo..." : "ADD +"}</button>
           </div>
         </div>
       </section>
       <div className={`xl:w-5/12 w-full mx-auto xl:min-h-160 min-h-171 shadow-2xl ${darkMode ? "text-white bg-[#1e223c]" : "bg-white"}`}>
-        {filteredTodos.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-10 text-gray-400">
-            <p className="text-lg font-semibold">No todos yet</p>
-            <p className="text-sm">Add a task to get started...</p>
-          </div>
-        ) :
-          (filteredTodos.map((item) => (
-            <TodoItems
-              key={item._id}
-              text={item.text}
-              isComplete={item.isComplete}
-              createdAt={item.createdAt}
-              deleteTodo={deleteTodo}
-              toggle={toggle}
-              id={item._id}
-            />
-          )))}
+        {isLoading ? <p className='p-10' >Loading todos...</p> :
+          filteredTodos.length === 0 ? (
+            <div className="flex flex-col items-center justify-center py-10 text-gray-400">
+              <p className="text-lg font-semibold">No todos yet</p>
+              <p className="text-sm">Add a task to get started...</p>
+            </div>
+          ) :
+            (filteredTodos.map((item) => (
+              <TodoItems
+                key={item._id}
+                text={item.text}
+                isComplete={item.isComplete}
+                createdAt={item.createdAt}
+                deleteTodo={deleteTodo}
+                toggle={toggle}
+                _id={item._id}
+              />
+            )))}
       </div>
       <div className={` xl:w-5/12 w-full flex justify-between p-2 shadow-xl border-t z-50 sticky place-self-center bottom-0 xl:text-[14px] text-[10px] 
             ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
