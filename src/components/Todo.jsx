@@ -7,6 +7,7 @@ import sunIcon from '../assets/icon-sun.svg'
 const Todo = () => {
   const token = localStorage.getItem("token");
   const API_URL = import.meta.env.VITE_API_URL;
+  const [ isAdding, setIsAdding ] = useState(false);
 
   const [todoList, setTodoList] = useState([]);
   useEffect(() => {
@@ -34,6 +35,7 @@ const Todo = () => {
   const add = async () => {
     const inputText = inputRef.current.value.trim();
     if (inputText === "") return;
+    try {      setIsAdding(true);
     const res = await fetch(`${API_URL}/todos`, {
       method: "POST",
       headers: {
@@ -47,6 +49,11 @@ const Todo = () => {
 
     setTodoList((prev) => [...prev, newTodo]);
     inputRef.current.value = "";
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsAdding(false);
+    }
   };
 
   const deleteTodo = async (_id) => {
@@ -111,7 +118,10 @@ const Todo = () => {
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
-            <button onClick={add} className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-12 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>ADD +</button>
+            <button 
+            onClick={add}
+            disabled={isAdding}
+             className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-12 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>{isAdding ? "Adding todo..." : "ADD +"}</button>
           </div>
         </div>
       </section>
