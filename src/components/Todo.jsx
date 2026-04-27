@@ -139,7 +139,11 @@ const Todo = () => {
             </div>
           </div>
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
-            <input ref={inputRef} className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
+            <input 
+            ref={inputRef} 
+            disabled={isAdding}
+            disabled={isLoading}
+            className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button
               onClick={add}
