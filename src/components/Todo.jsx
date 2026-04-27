@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import moonIcon from '../assets/icon-moon.svg';
 import TodoItems from './TodoItems';
-import sunIcon from '../assets/icon-sun.svg'
+import sunIcon from '../assets/icon-sun.svg';
+import { useNavigate } from 'react-router-dom';
 
 
 const Todo = () => {
@@ -9,6 +10,9 @@ const Todo = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLogout, setIsLogout] = useState(false);
+
+  const navigate = useNavigate();
 
   const [todoList, setTodoList] = useState([]);
   useEffect(() => {
@@ -29,7 +33,7 @@ const Todo = () => {
       } finally {
         setIsLoading(false);
       }
-      
+
     };
 
     fetchTodos();
@@ -122,6 +126,11 @@ const Todo = () => {
     localStorage.setItem("theme", JSON.stringify(darkMode));
   }, [darkMode]);
 
+    const logout = () => {
+  localStorage.removeItem("token");
+  navigate("/");
+};
+
   return (
     <div className={` w-full relative min-h-screen ${darkMode ? "text-white bg-black" : " bg-white "}`} >
       <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center  bg-cover bg-no-repeat flex  h-40 z-50 xl:text-[16px] text-[14px]   
@@ -131,7 +140,18 @@ const Todo = () => {
         }`}>
         <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15 mb-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
-            <h1 className=' text-white xs:text-3xl text-xl font-semibold '>To-Do List</h1>
+            <div>
+              <button
+                onClick={() => setIsLogout(!isLogout)}
+                className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>    
+            {
+              isLogout && 
+              <button 
+              onClick={logout}
+              className='bg-red-600 text-white py-1 px-3 rounded-md ml-9 xs:text-xs text-sm cursor-pointer'
+              >logout</button>
+            }
+            </div>
             <div
               className="cursor-pointer"
               onClick={() => setDarkMode(!darkMode)}>
@@ -139,11 +159,11 @@ const Todo = () => {
             </div>
           </div>
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
-            <input 
-            ref={inputRef} 
-            disabled={isAdding}
-            disabled={isLoading}
-            className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
+            <input
+              ref={inputRef}
+              disabled={isAdding}
+              disabled={isLoading}
+              className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button
               onClick={add}
