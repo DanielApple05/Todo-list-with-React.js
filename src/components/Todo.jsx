@@ -148,7 +148,7 @@ const Todo = () => {
             <button
               onClick={add}
               disabled={isAdding}
-              className='border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-12 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500'>{isAdding ? "Adding todo..." : "ADD +"}</button>
+              className={`border-none rounded-lg bg-[#b266ff] xl:w-32 w-20 xl:h-12 h-10 text-white xl:text-lg text-sm font-medium cursor-pointer hover:bg-blue-500 ${isAdding ? "opacity-50 cursor-not-allowed text-xs" : ""}`}>{isAdding ? "Adding todo..." : "ADD +"}</button>
           </div>
         </div>
       </section>
