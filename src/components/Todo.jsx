@@ -147,7 +147,7 @@ const Todo = () => {
                 createdAt={item.createdAt}
                 deleteTodo={deleteTodo}
                 toggle={toggle}
-                _id={item._id}
+                id={item._id}
               />
             )))}
       </div>
