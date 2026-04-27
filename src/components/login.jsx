@@ -73,6 +73,7 @@ const login = () => {
           <input
             type="email"
             placeholder='Email'
+            disabled={isLoading}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             className='border border-gray-300 rounded-md p-2 w-full ' />
@@ -82,6 +83,7 @@ const login = () => {
           <input
             type="password"
             placeholder='Password'
+            disabled={isLoading}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className='border border-gray-300 rounded-md p-2 w-full' />
@@ -93,8 +95,11 @@ const login = () => {
           disabled={isLoading}          
           className={`bg-purple-500 text-white py-2 px-4 rounded-md w-full cursor-pointer ${ isLoading && <p>Loading...</p>}`}>{ isLoading ? "Loading..." : loggedIn ? "Sign Up" : "Log In"}</button>
         </form>
-        <p className='text-[12px]'>
-          {loggedIn ? "Already have an account?" : "Don't have an account?"} <span className='text-blue-500 cursor-pointer' onClick={() => setLoggedIn(!loggedIn)}>{loggedIn ? "Log In" : "Sign Up"}</span>
+        <p 
+        className='text-[12px]'>
+          {loggedIn ? "Already have an account?" : "Don't have an account?"} <button
+          disabled={isLoading} 
+          className='text-blue-500 cursor-pointer' onClick={() => setLoggedIn(!loggedIn)}>{loggedIn ? "Log In" : "Sign Up"}</button>
         </p>
       </div>
     </div>
