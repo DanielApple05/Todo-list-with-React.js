@@ -63,31 +63,48 @@ const Todo = () => {
   };
 
   const deleteTodo = async (_id) => {
-    await fetch(`${API_URL}/todos/${_id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    setTodoList((prev) => prev.filter((todo) => todo._id !== _id));
+    try {
+      const res = await fetch(`${API_URL}/todos/${_id}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Failed to delete todo");
+      }
+      setTodoList((prev) => prev.filter((todo) => todo._id !== _id));
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("Failed to delete todo. Please try again.");
+    }
   };
 
   const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
   );
 
   const toggle = async (_id) => {
-    const res = await fetch(`${API_URL}/todos/${_id}`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const updatedTodo = await res.json();
-    setTodoList((prev) =>
-      prev.map((todo) =>
-        todo._id === _id ? updatedTodo : todo
-      )
-    );
+    try {
+      const res = await fetch(`${API_URL}/todos/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (!res.ok) {
+        throw new Error("Failed to toggle todo");
+      }
+      const updatedTodo = await res.json();
+      setTodoList((prev) =>
+        prev.map((todo) =>
+          todo._id === _id ? updatedTodo : todo
+        )
+      );
+    } catch (err) {
+      console.error("Toggle error:", err);
+      alert("Failed to update todo. Please try again.");
+    }
   };
   const [filter, setFilter] = useState("all");
   const itemsLeft = todoList.filter(todo => !todo.isComplete).length;
