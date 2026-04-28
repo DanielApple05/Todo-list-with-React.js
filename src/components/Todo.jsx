@@ -4,7 +4,7 @@ import TodoItems from './TodoItems';
 import sunIcon from '../assets/icon-sun.svg';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faDoorClosed } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
 
 
@@ -168,17 +168,17 @@ const Todo = () => {
           : "bg-[url('/images/bg-desktop-light.jpg')]"
         }`}>
         <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15 mb-15'>
-          <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
+          <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-10 justify-between xl:px-0 px-5 '>
 
-            <div>
-              <div className='text-l flex items-center space-x-2 cursor-pointer'>
-              <FontAwesomeIcon icon={faCircleUser} />
+            <div className='space-y-2'>
+              <div className='text-lg flex items-center space-x-2 cursor-pointer'>
+                <FontAwesomeIcon icon={faCircleUser} />
                 <p >
-                {initial}
-              </p>
-              <FontAwesomeIcon icon={faDoorClosed}
-              onClick={logout} 
-                className=" text-white text-xs py-1 px-2 rounded-md" />
+                  {initial}
+                </p>
+                <FontAwesomeIcon icon={faArrowRightFromBracket}
+                  onClick={logout}
+                  className=" py-1 px-2 rounded-md" />
               </div>
               <button
                 onClick={() => setIsLogout(!isLogout)}
@@ -187,7 +187,7 @@ const Todo = () => {
             <div className='grid items-center'>
               <img src={darkMode ? sunIcon : moonIcon}
                 alt="themeMode"
-                className=' cursor-pointer xl:w-7 w-4'
+                className=' cursor-pointer xl:w-9 w-6'
                 onClick={() => setDarkMode(!darkMode)} />
             </div>
           </div>
