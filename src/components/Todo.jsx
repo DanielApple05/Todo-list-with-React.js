@@ -13,7 +13,7 @@ const Todo = () => {
   const API_URL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token");
   const user = token ? jwtDecode(token) : null;
-  const initial = user?.email?.slice(0, 5).toUpperCase();
+  const initial = user?.email?.split('@')[0]?.toUpperCase();
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
@@ -23,7 +23,7 @@ const Todo = () => {
   );
   const [filter, setFilter] = useState("all");
   const isLoggedIn = !!token;
-  
+
   useEffect(() => {
     const fetchTodos = async () => {
       try {
@@ -170,29 +170,30 @@ const Todo = () => {
         <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15 mb-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
 
-            <button
-              onClick={() => setIsLogout(!isLogout)}
-              className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>
-
-            <div className='grid'>
-              <div className='flex items-center'>
-                <img src={darkMode ? sunIcon : moonIcon}
-                  alt="themeMode"
-                  className=' cursor-pointer xl:w-7 w-4'
-                  onClick={() => setDarkMode(!darkMode)} />
-
-                <FontAwesomeIcon icon={faCircleUser}
-                  onClick={() => setIsLogout(!isLogout)} />
-                {isLogout && (
-                  <button onClick={logout} className="bg-red-500 text-white text-xs py-1 px-2 rounded-md">
-                    Logout
-                  </button>
-                )}
-              </div>
+            <div>
               <p className='text-xl'>
                 {initial}
               </p>
+              <button
+                onClick={() => setIsLogout(!isLogout)}
+                className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>
             </div>
+            <div className='flex items-center space-x-3'>
+              <img src={darkMode ? sunIcon : moonIcon}
+                alt="themeMode"
+                className=' cursor-pointer xl:w-7 w-4'
+                onClick={() => setDarkMode(!darkMode)} />
+
+              <FontAwesomeIcon icon={faCircleUser}
+                onClick={() => setIsLogout(!isLogout)} />
+              {isLogout && (
+                <button onClick={logout} className="bg-red-500 text-white text-xs py-1 px-2 rounded-md">
+                  Logout
+                </button>
+              )}
+            </div>
+
+
           </div>
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input
