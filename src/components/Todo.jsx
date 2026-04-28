@@ -171,14 +171,13 @@ const Todo = () => {
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-10 justify-between xl:px-0 px-5 '>
 
             <div className='space-y-2'>
-              <div className='text-lg flex items-center space-x-2 cursor-pointer'>
-                <FontAwesomeIcon icon={faCircleUser} />
+              <div className='text-lg flex items-center space-x-2'>
+                <FontAwesomeIcon icon={faArrowRightFromBracket}
+                  onClick={logout} />
                 <p >
                   {initial}
                 </p>
-                <FontAwesomeIcon icon={faArrowRightFromBracket}
-                  onClick={logout}
-                  className=" py-1 px-2 rounded-md" />
+                <FontAwesomeIcon icon={faCircleUser} />
               </div>
               <button
                 onClick={() => setIsLogout(!isLogout)}
@@ -187,7 +186,7 @@ const Todo = () => {
             <div className='grid items-center'>
               <img src={darkMode ? sunIcon : moonIcon}
                 alt="themeMode"
-                className=' cursor-pointer xl:w-9 w-6'
+                className=' cursor-pointer xl:w-7 w-6'
                 onClick={() => setDarkMode(!darkMode)} />
             </div>
           </div>
