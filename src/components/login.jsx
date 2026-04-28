@@ -95,7 +95,7 @@ const login = () => {
           <button 
           type='submit' 
           disabled={isLoading}          
-          className={`bg-purple-500 text-white py-2 px-4 rounded-md w-full cursor-pointer ${ isLoading && <p>Loading...</p>}`}>{ isLoading ? "Loading..." : loggedIn ? "Login" : "Sign Up"}</button>
+          className={`bg-purple-500 text-white py-2 px-4 rounded-md w-full cursor-pointer ${ isLoading && "Loading..."}`}>{ isLoading ? "Loading..." : loggedIn ? "Login" : "Sign Up"}</button>
         </form>
         {severError && (
           <p className=" text-end text-red-500 text-[10px]">{severError}</p>
