@@ -4,7 +4,7 @@ import TodoItems from './TodoItems';
 import sunIcon from '../assets/icon-sun.svg';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faDoorClosed } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
 
 
@@ -171,29 +171,25 @@ const Todo = () => {
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
 
             <div>
-              <p className='text-xl'>
+              <div className='text-l flex items-center space-x-2 cursor-pointer'>
+              <FontAwesomeIcon icon={faCircleUser} />
+                <p >
                 {initial}
               </p>
+              <FontAwesomeIcon icon={faDoorClosed}
+              onClick={logout} 
+                className=" text-white text-xs py-1 px-2 rounded-md" />
+              </div>
               <button
                 onClick={() => setIsLogout(!isLogout)}
                 className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>
             </div>
-            <div className='flex items-center space-x-3'>
+            <div className='grid items-center'>
               <img src={darkMode ? sunIcon : moonIcon}
                 alt="themeMode"
                 className=' cursor-pointer xl:w-7 w-4'
                 onClick={() => setDarkMode(!darkMode)} />
-
-              <FontAwesomeIcon icon={faCircleUser}
-                onClick={() => setIsLogout(!isLogout)} />
-              {isLogout && (
-                <button onClick={logout} className="bg-red-500 text-white text-xs py-1 px-2 rounded-md">
-                  Logout
-                </button>
-              )}
             </div>
-
-
           </div>
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input
