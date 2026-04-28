@@ -11,6 +11,7 @@ const Todo = () => {
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
+  const [ isclearing, setIsClearing ] = useState(false);
 
   const navigate = useNavigate();
 
@@ -115,25 +116,29 @@ const Todo = () => {
     return true;
 
   });
- const clearCompleted = async () => {
-  const completedTodos = todoList.filter(todo => todo.isComplete);
-  try {
-    await Promise.all(
-      completedTodos.map(todo =>
-        fetch(`${API_URL}/todos/${todo._id}`, {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-      )
-    );
-    setTodoList(prev => prev.filter(todo => !todo.isComplete));
-  } catch (err) {
-    console.error("Clear completed error:", err);
-    alert("Failed to clear completed todos. Please try again.");
-  }
-};
+  const clearCompleted = async () => {
+    const completedTodos = todoList.filter(todo => todo.isComplete);
+    if (completedTodos.length === 0) return;
+    setIsClearing(true);
+    try {
+      const res = await Promise.all(
+        completedTodos.map(todo =>
+          fetch(`${API_URL}/todos/${todo._id}`, {
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
+        )
+      );
+       setTodoList(prev => prev.filter(todo => !todo.isComplete));
+    } catch (err) {
+      console.error("Clear completed error:", err);
+      alert("Failed to clear completed todos. Please try again.");
+    }
+    finally {setIsClearing(false);
+    } 
+  };
 
 
   useEffect(() => {
@@ -175,7 +180,7 @@ const Todo = () => {
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input
               ref={inputRef}
-              disabled={isAdding || isLoading }
+              disabled={isAdding || isLoading}
               className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button
@@ -251,12 +256,13 @@ const Todo = () => {
         </div>
 
         <div>
-          <p
+          <button
             onClick={clearCompleted}
+            disabled={isclearing}
             className="cursor-pointer text-red-500 hover:underline"
           >
-            Clear Completed
-          </p>
+           {isclearing ? "Clearing..." : "Clear Completed"}
+          </button>
 
         </div>
       </div>
