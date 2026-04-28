@@ -10,6 +10,7 @@ const login = () => {
   const [password, setPassword] = React.useState("");
   const [errors, setErrors] = React.useState({});
   const [ isLoading, setIsLoading ] = React.useState(false);
+  const [ severError, setServerError ] = React.useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -45,6 +46,7 @@ const login = () => {
 
         if (!res.ok) {
           console.log(data);
+          setServerError(data.message || "An error occurred.");
           return;
         }
 
@@ -95,6 +97,9 @@ const login = () => {
           disabled={isLoading}          
           className={`bg-purple-500 text-white py-2 px-4 rounded-md w-full cursor-pointer ${ isLoading && <p>Loading...</p>}`}>{ isLoading ? "Loading..." : loggedIn ? "Sign Up" : "Log In"}</button>
         </form>
+        {severError && (
+          <p className=" text-end text-red-500 text-[10px]">{severError}</p>
+        )}
         <p 
         className='text-[12px]'>
           {loggedIn ? "Already have an account?" : "Don't have an account?"} <button
