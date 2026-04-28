@@ -24,18 +24,14 @@ const Todo = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-
         const data = await res.json();
         setTodoList(data);
-
       } catch (err) {
         console.error(err);
       } finally {
         setIsLoading(false);
       }
-
     };
-
     fetchTodos();
   }, []);
 
