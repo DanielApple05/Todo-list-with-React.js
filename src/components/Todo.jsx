@@ -3,19 +3,28 @@ import moonIcon from '../assets/icon-moon.svg';
 import TodoItems from './TodoItems';
 import sunIcon from '../assets/icon-sun.svg';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { jwtDecode } from "jwt-decode";
 
 
 const Todo = () => {
-  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
+  const token = localStorage.getItem("token");
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
-  const [ isclearing, setIsClearing ] = useState(false);
-
-  const navigate = useNavigate();
-
+  const [isclearing, setIsClearing] = useState(false);
   const [todoList, setTodoList] = useState([]);
+  const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
+  );
+  const [filter, setFilter] = useState("all");
+  const isLoggedIn = !!token;
+  const user = token ? jwtDecode(token) : null;
+  const initial = user?.email?.charAt(0).toUpperCase();
+
+
   useEffect(() => {
     const fetchTodos = async () => {
       try {
@@ -80,10 +89,6 @@ const Todo = () => {
       alert("Failed to delete todo. Please try again.");
     }
   };
-
-  const [darkMode, setDarkMode] = useState(() => JSON.parse(localStorage.getItem("theme")) || false
-  );
-
   const toggle = async (_id) => {
     try {
       const res = await fetch(`${API_URL}/todos/${_id}`, {
@@ -107,7 +112,7 @@ const Todo = () => {
       alert("Failed to update todo. Please try again.");
     }
   };
-  const [filter, setFilter] = useState("all");
+
   const itemsLeft = todoList.filter(todo => !todo.isComplete).length;
   const filteredTodos = todoList.filter(todo => {
     if (filter === "completed") return todo.isComplete;
@@ -131,15 +136,15 @@ const Todo = () => {
           })
         )
       );
-       setTodoList(prev => prev.filter(todo => !todo.isComplete));
+      setTodoList(prev => prev.filter(todo => !todo.isComplete));
     } catch (err) {
       console.error("Clear completed error:", err);
       alert("Failed to clear completed todos. Please try again.");
     }
-    finally {setIsClearing(false);
-    } 
+    finally {
+      setIsClearing(false);
+    }
   };
-
 
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(darkMode));
@@ -150,6 +155,12 @@ const Todo = () => {
     navigate("/");
   };
 
+  useEffect(() => {
+    if (!token) {
+      navigate("/");
+    }
+  }, [token]);
+
   return (
     <div className={` w-full relative min-h-screen ${darkMode ? "text-white bg-black" : " bg-white "}`} >
       <section className={` sticky top-0 left-0 w-full min-w-12/12 place-content-center  bg-cover bg-no-repeat flex  h-40 z-50 xl:text-[16px] text-[14px]   
@@ -159,22 +170,29 @@ const Todo = () => {
         }`}>
         <div className=' flex flex-col xl:min-w-5/12 min-w-full place-self-center xl:mt-10 mt-15 mb-15'>
           <div className='flex items-center xl:mt-7 mt-3 xl:mb-6 mb-15 justify-between xl:px-0 px-5'>
-            <div>
-              <button
-                onClick={() => setIsLogout(!isLogout)}
-                className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>
-              {
-                isLogout &&
-                <button
-                  onClick={logout}
-                  className='bg-red-600 text-white py-1 px-3 rounded-md ml-9 xs:text-xs text-sm cursor-pointer'
-                >logout</button>
-              }
-            </div>
-            <div
-              className="cursor-pointer"
-              onClick={() => setDarkMode(!darkMode)}>
-              <img src={darkMode ? sunIcon : moonIcon} alt="themeMode" className='xl:w-7 w-4' />
+
+            <button
+              onClick={() => setIsLogout(!isLogout)}
+              className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>
+
+            <div className='grid'>
+              <div className='flex items-center'>
+                <img src={darkMode ? sunIcon : moonIcon}
+                  alt="themeMode"
+                  className=' cursor-pointer xl:w-7 w-4'
+                  onClick={() => setDarkMode(!darkMode)} />
+
+                <FontAwesomeIcon icon={faCircleUser}
+                  onClick={() => setIsLogout(!isLogout)} />
+                {isLogout && (
+                  <button onClick={logout} className="bg-red-500 text-white text-xs py-1 px-2 rounded-md">
+                    Logout
+                  </button>
+                )}
+              </div>
+              <p className='text-xl'>
+                {initial}
+              </p>
             </div>
           </div>
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
@@ -261,7 +279,7 @@ const Todo = () => {
             disabled={isclearing}
             className="cursor-pointer text-red-500 hover:underline"
           >
-           {isclearing ? "Clearing..." : "Clear Completed"}
+            {isclearing ? "Clearing..." : "Clear Completed"}
           </button>
 
         </div>
