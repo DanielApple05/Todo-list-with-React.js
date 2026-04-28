@@ -12,6 +12,8 @@ const Todo = () => {
   const navigate = useNavigate();
   const API_URL = import.meta.env.VITE_API_URL;
   const token = localStorage.getItem("token");
+  const user = token ? jwtDecode(token) : null;
+  const initial = user?.email?.slice(0, 5).toUpperCase();
   const [isAdding, setIsAdding] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLogout, setIsLogout] = useState(false);
@@ -21,10 +23,7 @@ const Todo = () => {
   );
   const [filter, setFilter] = useState("all");
   const isLoggedIn = !!token;
-  const user = token ? jwtDecode(token) : null;
-  const initial = user?.email?.charAt(0).toUpperCase();
-
-
+  
   useEffect(() => {
     const fetchTodos = async () => {
       try {
