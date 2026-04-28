@@ -172,7 +172,9 @@ const Todo = () => {
 
             <div className='space-y-2'>
               <div className='text-lg flex items-center space-x-2'>
-                <FontAwesomeIcon icon={faArrowRightFromBracket}
+                <FontAwesomeIcon
+                className='cursor-pointer' 
+                icon={faArrowRightFromBracket}
                   onClick={logout} />
                 <p >
                   {initial}
