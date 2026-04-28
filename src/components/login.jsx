@@ -32,8 +32,8 @@ const login = () => {
     if (Object.keys(newErrors).length === 0) {
       setIsLoading(true);
       try {
-        const url = loggedIn ? `${API_URL}/auth/signup`
-          : `${API_URL}/auth/login`;
+        const url = loggedIn ? `${API_URL}/auth/login`
+          : `${API_URL}/auth/signup`;
 
         const res = await fetch(url, {
           method: "POST",
@@ -69,7 +69,7 @@ const login = () => {
     <div className="flex items-center justify-center h-screen bg-[url('../images/login-background.png')] bg-cover bg-no-repeat">
       <div className='bg-white p-10 rounded-lg shadow-xl xl:w-4/12 w-10/12 max-h-2.5/4 '>
         <h2 className='text-2xl font-bold text-center'>
-          {loggedIn ? "Sign Up!" : "Please Log In"}
+          {loggedIn ? "Please Login" : "Sign Up!"}
         </h2>
         <form onSubmit={handleSubmit} className='grid gap-3 my-5' >
           <input
@@ -95,16 +95,16 @@ const login = () => {
           <button 
           type='submit' 
           disabled={isLoading}          
-          className={`bg-purple-500 text-white py-2 px-4 rounded-md w-full cursor-pointer ${ isLoading && <p>Loading...</p>}`}>{ isLoading ? "Loading..." : loggedIn ? "Sign Up" : "Log In"}</button>
+          className={`bg-purple-500 text-white py-2 px-4 rounded-md w-full cursor-pointer ${ isLoading && <p>Loading...</p>}`}>{ isLoading ? "Loading..." : loggedIn ? "Login" : "Sign Up"}</button>
         </form>
         {severError && (
           <p className=" text-end text-red-500 text-[10px]">{severError}</p>
         )}
         <p 
         className='text-[12px]'>
-          {loggedIn ? "Already have an account?" : "Don't have an account?"} <button
+          {loggedIn ? "Don't have an account?" : "Already have an account?"} <button
           disabled={isLoading} 
-          className='text-blue-500 cursor-pointer' onClick={() => setLoggedIn(!loggedIn)}>{loggedIn ? "Log In" : "Sign Up"}</button>
+          className='text-blue-500 cursor-pointer' onClick={() => setLoggedIn(!loggedIn)}>{loggedIn ? "sign up" : "login"}</button>
         </p>
       </div>
     </div>
