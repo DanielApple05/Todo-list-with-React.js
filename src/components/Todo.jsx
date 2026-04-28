@@ -115,17 +115,35 @@ const Todo = () => {
     return true;
 
   });
-  const clearCompleted = () => {
-    setTodoList(todoList.filter(todo => !todo.isComplete));
-  };
+ const clearCompleted = async () => {
+  const completedTodos = todoList.filter(todo => todo.isComplete);
+  try {
+    await Promise.all(
+      completedTodos.map(todo =>
+        fetch(`${API_URL}/todos/${todo._id}`, {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+      )
+    );
+    setTodoList(prev => prev.filter(todo => !todo.isComplete));
+  } catch (err) {
+    console.error("Clear completed error:", err);
+    alert("Failed to clear completed todos. Please try again.");
+  }
+};
+
+
   useEffect(() => {
     localStorage.setItem("theme", JSON.stringify(darkMode));
   }, [darkMode]);
 
-    const logout = () => {
-  localStorage.removeItem("token");
-  navigate("/");
-};
+  const logout = () => {
+    localStorage.removeItem("token");
+    navigate("/");
+  };
 
   return (
     <div className={` w-full relative min-h-screen ${darkMode ? "text-white bg-black" : " bg-white "}`} >
@@ -139,14 +157,14 @@ const Todo = () => {
             <div>
               <button
                 onClick={() => setIsLogout(!isLogout)}
-                className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>    
-            {
-              isLogout && 
-              <button 
-              onClick={logout}
-              className='bg-red-600 text-white py-1 px-3 rounded-md ml-9 xs:text-xs text-sm cursor-pointer'
-              >logout</button>
-            }
+                className=' cursor-pointer text-white xs:text-3xl text-xl font-semibold '>To-Do List</button>
+              {
+                isLogout &&
+                <button
+                  onClick={logout}
+                  className='bg-red-600 text-white py-1 px-3 rounded-md ml-9 xs:text-xs text-sm cursor-pointer'
+                >logout</button>
+              }
             </div>
             <div
               className="cursor-pointer"
@@ -157,8 +175,7 @@ const Todo = () => {
           <div className={`flex items-center rounded-lg xl:mx-0 mx-5  ${darkMode ? "bg-[#1e223c]" : "bg-white"}`}>
             <input
               ref={inputRef}
-              disabled={isAdding}
-              disabled={isLoading}
+              disabled={isAdding || isLoading }
               className=' border-0 outline-none flex-1 xl:h-12 h-10 pl-6 pr-2 placeholder:text-slate-600' type="text" placeholder='create a new todo...' />
 
             <button
